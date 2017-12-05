@@ -1,0 +1,20 @@
+#TILLO
+--------------------------------------------------------------
+--- Tillotson EOS parameter for *** High-density Polyethylene (MieGruniesen) ***
+--------------------------------------------------------------
+--- Bulk modulus = density*sound_speed**2
+--- tilla = Gruneisen ratio = 0.6
+--------------------------------------------------------------
+TL_RHO0               Reference density (kg/m^3)    :  0.93D+3 
+TL_CHEAT              Spec. heat capacity (K/kg/K)  :  1.D+3
+TL_BULKA              Bulk modulus (Pa)             :  7.6D+9
+TL_BULKB              Tillotson B constant (Pa)     :  0.0D+0
+TL_EZERO              Tillotson E0 constant (J/kg)  :  0.0D+0
+TL_THERMA             Tillotson a constant          :  0.6D+0 
+TL_THERMB             Tillotson b constant          :  0.0D+0
+TL_ALPHA              Tillotson alpha constant      :  0.0D+0
+TL_BETA               Tillotson beta constant       :  0.0D+0
+TL_EIV                SIE incipient vaporisation    :  4.72D+16 
+TL_ECV                SIE complete vaporisation     :  18.2D+16
+--------------------------------------------------------------
+<<END

@@ -1,0 +1,18 @@
+#TILLO
+--------------------------------------------------------------
+--- Tillotson EOS parameter for *** ICE ***
+--------------------------------------------------------------
+--------------------------------------------------------------
+TL_RHO0               Reference density (kg/m^3)    :  9.10D+2   
+TL_CHEAT              Spec. heat capacity (K/kg/K)  :  2.05D+3
+TL_BULKA              Bulk modulus (Pa)             :  9.80D+9  
+TL_BULKB              Tillotson B constant (Pa)     :  6.50D+9 
+TL_EZERO              Tillotson E0 constant (J/kg)  :  10.0D+6  
+TL_THERMA             Tillotson a constant          :  0.3D0     
+TL_THERMB             Tillotson b constant          :  0.1D0    
+TL_ALPHA              Tillotson alpha constant      :  10.D0     
+TL_BETA               Tillotson beta constant       :  5.D0      
+TL_EIV                SIE incipient vaporisation    :  7.73D+5   
+TL_ECV                SIE complete vaporisation     :  3.04D+6 
+--------------------------------------------------------------
+<<END
