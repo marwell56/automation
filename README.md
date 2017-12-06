@@ -8,15 +8,15 @@ The architecture follows a main script and a directory that the script is depend
 
 If a batch, rather than a single job as given in this skelatal script, of jobs is desired to be submitted in one script, there is a commented out section of the script that can do this. This involves telling the code to create several directories, then copying a modified copydir into each directory. Rather than replacing a bracket-delineated variable with a single variable, a list can be specified:
 
-  B =["3.0D+10","4.0D+10","5.0D+10","6.0D+10","7.0D+10"]
+    B =["3.0D+10","4.0D+10","5.0D+10","6.0D+10","7.0D+10"]
   
-  for val in range(0, len(B)):
-    with open('file') as tmp, open('other_file') as o:
-      for line in tmp:
-        line=line.replace("{B}",B[val])
+    for val in range(0, len(B)):
+      with open('file') as tmp, open('other_file') as o:
+        for line in tmp:
+          line=line.replace("{B}",B[val])
         
-        o.write()
-    o.close()
+          o.write()
+      o.close()
     
 In this way, multiple jobs can easily be submitted through this simple script.     
 
