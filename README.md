@@ -1,7 +1,7 @@
 # automation
 """ A simple python script for setting up and submitting batches of iSALE jobs through SLURM. Meant for use in the terminal. 
 
-The main idea is that users can use a single master script to create a run directory with specific material and asteroid input decks, then submit the job over slurm. 
+This is intended to allow a user to quickly and easily set up a batch of jobs from a single master script that creates a run directory with specific material and asteroid input decks before submitting the job over slurm.  
 
 This script uses python's os and sys modules to create the run directories and drop commands into the command line
 The architecture follows a main script and a directory that the script is dependent upon to carry out its tasks. This 'depedencies' folder includes template files for both the asteroid.inp and the material.inp files. Within these files are string variables enclosed in curly brackets (i.e. '{var}') that are picked up and replaced with user-specified values for that variable. The curly brackets are meerly a convenient way to pick up the specific string values to be replaced by python's string.replace() function. 
