@@ -26,10 +26,10 @@ OBJMAT                object material               : limesto
 OBJDAM                object damage                 : 1.D0
 OBJTYPE               object type                   : SPHEROID
 ------------------- Target Parameters ----------------------------------
-LAYNUM                layers number                 : 3
-LAYPOS                layer position                : 57      :139      : 198
-LAYMAT                layer material                : granite :sandsto  : limesto
-LAYTPROF              thermal profile               : CONST   : CONST   :CONST
+LAYNUM                layers number                 : 4
+LAYPOS                layer position                : 26      : 39      :99       : 160
+LAYMAT                layer material                : granite :limesto  :sandsto  : limesto
+LAYTPROF              thermal profile               : CONST   : CONST   :CONST    :CONST
 ------------------- Time Parameters ------------------------------------
 DT                    initial time increment        : 0.5D-3 
 DTMAX                 maximum timestep              : 5.0D+0

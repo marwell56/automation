@@ -32,6 +32,6 @@ YLIMDAM      ylimdam                                                      : 5.D+
 BDTPRES      bdt_pres                                                     : -1.D+00      : -1.D+00      : -1.D+00    
 BPTPRES      bpt_pres                                                     : -1.D+00      : -1.D+00      : -1.D+00  
 ---------acoustic fluidization (block model) -----------------------------------
-GAMETA       gam_eta                                                      : 8.D-03       : 8.D-03       : 8.D-03  
-GAMBETA      gam_beta                                                     : 2.D+02       : 1.D+02       : 2.D+02     
+GAMETA       gam_eta                                                      : 1.D-4       : 8.D-03       : 1.D-4  
+GAMBETA      gam_beta                                                     : 1.D+3       : 1.D+02       : 1.D+3     
 <<END ! used to identify the end of this file

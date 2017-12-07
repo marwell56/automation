@@ -26,14 +26,14 @@ OBJMAT                object material               : limesto
 OBJDAM                object damage                 : 1.D0
 OBJTYPE               object type                   : SPHEROID
 ------------------- Target Parameters ----------------------------------
-LAYNUM                layers number                 : 3
-LAYPOS                layer position                : 57      :139      : 198
-LAYMAT                layer material                : granite :sandsto  : limesto
-LAYTPROF              thermal profile               : CONST   : CONST   :CONST
+LAYNUM                layers number                 : 4
+LAYPOS                layer position                : 26      : 39      :99       : 160
+LAYMAT                layer material                : granite :limesto  :sandsto  : limesto
+LAYTPROF              thermal profile               : CONST   : CONST   :CONST    :CONST
 ------------------- Time Parameters ------------------------------------
 DT                    initial time increment        : 0.5D-3 
 DTMAX                 maximum timestep              : 5.0D+0
-TEND                  end time                      : 8.D1
+TEND                  end time                      : 1.D1
 DTSAVE                save interval                 : 5.D-1
 ------------------- Ac. Fluid. Parameters (see also material.inp) ------
 TOFF                  toff                          : 16.D0
@@ -57,11 +57,11 @@ AVIS2                 art. visc. quad.              : 1.20D0
 TR_QUAL               integration qual.             : 1
 TR_SPCH               tracer spacing X              : -2.D0       : -2.D0       : -2.D0
 TR_SPCV               tracer spacing Y              : -2.D0       : -2.D0       : -2.D0
-TR_VAR                add. tracer fiels             : #TrP-TrT#
+TR_VAR                add. tracer fiels             : #TrP-TrT-TrM#
 ------------------- Control parameters (global) ------------------------
 STRESS                Consider stress               : 1
 ------------------- Data Saving Parameters -----------------------------
 QUALITY               Compression rate              : -50
-VARLIST               List of variables        : #Den-ALP-Tmp-TPS-Pre-Sie-Yld-YAc-Dam-VEL#
+VARLIST               List of variables        : #Den-Alp-Tmp-TPS-Pre-Sie-Yld-YAc-Dam-VEL#
 ------------------------------------------------------------------------
 <<END
