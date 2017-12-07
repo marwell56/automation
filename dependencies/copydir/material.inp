@@ -1,0 +1,37 @@
+#ISMAT ! iSale material input file identification string
+--------------------------------------------------------------------------------
+MATNAME      Material name                                                : limesto      : granite      : sandsto      
+EOSNAME      EOS name                                                     : calcite      : granit2      : quarzit      
+EOSTYPE      EOS type                                                     : aneos        : aneos        : aneos        
+STRMOD       Strength model                                               : ROCK         : ROCK         : ROCK       
+DAMMOD       Damage model                                                 : COLLINS      : COLLINS      : COLLINS     
+ACFL         Acoustic fluidisation                                        : BLOCK        : BLOCK        : BLOCK        
+PORMOD       Porosity model                                               : NONE         : NONE         : NONE         
+DILMOD       Dilatancy model                                              : NONE         : NONE         : NONE         
+THSOFT       Thermal softening                                            : OHNAKA       : OHNAKA       : OHNAKA    
+LDWEAK       Low density weakening                                        : POLY         : POLY         : POLY     
+VISCO        Viscoelasticity                                              : NONE         : NONE         : NONE         
+--------------------------------------------------------------------------------
+---------general parameters ----------------------------------------------------
+POIS         pois                                                         : 2.D-01       : 2.5D-01      : 3.D-01      
+---------thermal softening -----------------------------------------------------
+TFRAC        tfrac                                                        : 1.2D+00      : 1.2D+00      : 1.2D+00      
+---------thermal parameters ----------------------------------------------------
+TMELT0       tmelt0                                                       : 1.673D+06    : 1.673D+03    : 1.673D+03    
+ASIMON       a_simon                                                      : 3.D+09       : 3.D+09       : 6.D+09       
+CSIMON       c_simon                                                      : 4.D+00       : 4.D+00       : 3.D+00       
+---------shear strength of intact material -------------------------------------
+YINT0        yint0                                                        : 2.5D+06      : 1.D+07       : 1.D+07      
+FRICINT      fricint                                                      : 1.D+00       : 2.D+00       : 1.5D+00    
+YLIMINT      ylimint                                                      : 1.D+09       : 2.5D+09      : 1.5D+09   
+---------shear strength of damaged material ------------------------------------
+YDAM0        ydam0 (ycoh)                                                 : 0.D+00       : 2.D+03       : 5.D+02     
+FRICDAM      fricdam                                                      : 4.D-01       : 8.D-01       : 6.D-01      
+YLIMDAM      ylimdam                                                      : 5.D+08       : 2.5D+09      : 1.5D+09    
+---------shear damage (Collins) ------------------------------------------------
+BDTPRES      bdt_pres                                                     : -1.D+00      : -1.D+00      : -1.D+00    
+BPTPRES      bpt_pres                                                     : -1.D+00      : -1.D+00      : -1.D+00  
+---------acoustic fluidization (block model) -----------------------------------
+GAMETA       gam_eta                                                      : 8.D-03       : 8.D-03       : 8.D-03  
+GAMBETA      gam_beta                                                     : 2.D+02       : 1.D+02       : 2.D+02     
+<<END ! used to identify the end of this file

@@ -1,0 +1,36 @@
+#ISPLT
+-----------------------------------------------------------------------
+VERSION   __DO NOT MODIFY__                       : 2.0
+--------- PLOT TYPES AND TIME STEPS -----------------------------------
+PLOTTYPE  Type of plot (right and left panel      : Mat : Tmp
+TIMESTEP  First and last files to be read         :   0 :  120
+INCREMNT  Spacing between files to be read        :   2
+--------- GRID GEOMETRY -----------------------------------------------
+GRIDH     Min and max i number for plotting       :   1 :  250
+GRIDV     Min and max j number for plotting       :   61 :  280
+--------- TRACER PARAMETERS -------------------------------------------
+TR_SPACE  Spacing between tracers to be plotted   :   5
+TR_SIZE   Size of tracer plot marker              :   1
+--------- PLOTTING PARAMETERS -----------------------------------------
+TITLES    Should titles be plotted?  (1=yes,0=no) :   1
+PANEL     Double (2) or single (1) panel plot     :   2
+PLOTSIZE  Plot width and Height (inches)          :   18. :  12.
+DEVICE    Graphics device and extension           :   png/png
+--------- PLOTTED VALUE MIN/MAX RANGE ---------------------------------
+VALRANGE1 Min and max values for 1st plot         :   0. :  1.5e8
+VALRANGE2 Min and max values for 2nd plot         :   0.e3 :  1.5e3
+--------- MATERIAL TYPES ----------------------------------------------
+MAT_TYPE  Material type for materials 1,2,3       :  Rock : Rock : Rock
+--------- UNITS -------------------------------------------------------
+DISTUNIT  Units for distance         (mm,cm,m,km) :   km
+TIMEUNIT  Units for times          (mks,ms,s,min) :   s
+--------- TECHNICAL PARAMETERS ----------------------------------------
+FORMAT    Data format for the files     (a,b,c,j) :   J
+ZIPPED    Are the data files zipped? (1=yes,0=no) :   0
+BOUNDS    Plot boundaries?           (1=yes,0=no) :   1
+COLOUR    Colour scheme                     (1-4) :   1
+CONTCOL   Use 256 colors instead of 16            :   0
+PLOTGRID  Should the grid be plotted?(1=yes,0=no) :   0
+ALE_MODE  ALE mode      (0=Eulerian,1=Lagrangian) :   0
+-----------------------------------------------------------------------
+<<END
