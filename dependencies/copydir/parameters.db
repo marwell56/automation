@@ -1,0 +1,5715 @@
+PARDB 1
+++++++++++++++++++++++++++++++++++++++++++++++
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : GENERAL
+DESC : General Model Info
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : SETUP
+DESC : Global Setup Parameters
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : CONTROL
+DESC : Technical (control) options
+<INFO>
+Several options exist for switching on/off functionality within the code.
+These help to optimise the code (i.e. using only necessary code).
+
+Other options exist to allow certain alternative implementations,
+some of which may be experimental or not fully tested, to be used.
+
+New users are recommended not to change these options unless
+specifically advised to.
+</INFO>
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : REGRIDDING
+DESC : Regridding
+<INFO>
+When restarting a calculation you can use the regridding
+functionality of iSALE to define a new grid and interpolate
+the data stored in the restart file onto the new grid.
+This feature is still under development, but currently offers the
+functionality to:
+\begin{itemize}
+\item Add or remove cells from the high-resolution zone
+\item Add or remove extension cells
+\item Coarsen the high-resolution zone by a factor of 2
+\end{itemize}
+</INFO>
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MESH 
+DESC : Mesh Geometry Parameters
+<INFO>
+iSALE uses a regular cartesian grid that comprises a central
+high-resolution zone, where the cell height and width are
+constant, and optional extension zones below, above and to
+the left and right of the high-resolution zone. 
+
+Cell height increases in a geometric progression away from
+the high-resolution zone in the extension zones above and below;
+cell width increases in the same manner away from the high-resolution
+zone in the extension zones to the left and right. The increase in cell
+size can be capped by a maximum allowable cell size in each dimension.
+
+The two-dimensional co-ordinate system employed can be set to standard
+cartesian co-ordinates or cylindrical co-ordinates. Typical impact
+simulations will employ cylindrical symmetry, with a high-resolution
+zone that encompasses the projectile and the portion of the mesh within
+which the crater is likely to fit.
+
+Extension zones to the right, top and bottom are used to displace
+the mesh boundaries far away from the cratering region, to minimise
+the adverse effects of reflections from the boundaries. In cylindrical
+symmetry geometry, no extension zone should be set on the left
+side of the mesh.
+</INFO>
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : GRADIENT
+DESC : Gradient Parameters
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : OBJECT
+DESC : Object Parameters
+<INFO>
+OBJNUM and PR\_TRACE only take one input.
+
+All other object parameters should be set for each projectile,
+separated by a colon in the input file.
+</INFO>
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MESOPORE
+DESC : Parameters for mesoscale-problems containing pores in target layers
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MESOPART
+DESC : Parameters for mesoscale-particles
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : TARGET
+DESC : Target Parameters
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : SLOPE
+DESC : Slope setup parameters
+PTYPE : P
+<INFO>
+These parameters are required to define a target with a slope.
+These are only required, if S\_TYPE = LANDSLIDE is defined.
+</INFO>
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : TIME
+DESC : Time Parameters
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : BOUNDARY
+DESC : Boundary Conditions
+<INFO>
+iSALE2D/3D currently supports the following boundary conditions in Eulerian
+mode:
+
+\begin{itemize}
+\item NOSLIP : Zero velocity in both coordinate directions
+\item FREESLIP : Zero velocity normal to the boundary
+\item OUTFLOW : Material allowed to follow across boundary
+\end{itemize}
+
+One of these boundary conditions must be assigned for the left,
+right, top and bottom boundaries (for 3D additionally for
+front and back).
+
+If iSALE-2D is run in Lagrangian mode, additional boundary conditions are
+available:
+\begin{itemize}
+\item FREESURFACE / FREESURF : Lagrangian free surface
+\item SQSHEAR : Applies a prescibed shear deformation velocity/acceleration 
+to all boundaries (must be set on all boundaries).
+\item TOPSQUASH : (top boundary only) Prescribes a velocity/acceleration to the top
+boundary. Side boundaries should be FREESURF; bottom boundary should be FREESLIP).
+\item PRESQUASH : Prescribes a constant pressure to the sides and an increasing 
+pressure to the top boundary, for simulating triaxial compression experiments 
+(bottom boundary should be set to FREESLIP).
+\end{itemize}
+
+Some of these Lagrangian boundary conditions require additional parameters.
+
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : STABILITY
+DESC : Numerical Stability Parameters
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : TRACER
+DESC : Tracer Particle Parameters
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : ACFL
+DESC : Acoustic Fluidization Parameters
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : OUTPUT
+DESC : Data Saving Parameters
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MATHEAD
+DESC : Header of material file
+PTYPE : M
+<INFO>
+In the header of the material file we define the different
+strength and material models used within the simulation.
+</INFO>
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_GENERAL
+DESC : General material parameter
+PTYPE : M
+<INFO>
+Parameters to define the elasticity or viscosity of the material.
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_ANEOS
+DESC : ANEOS table parameters for material
+PTYPE : M
+<INFO>
+Parameters and options for reading/creating ANEOS equation of state tables.
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_TILLO
+DESC : Tillotson EoS parameters for material
+PTYPE : M
+<INFO>
+Parameters for Tillotson analytical equation of state and simplifications thereof.
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_MIEGRUN
+DESC : Mie-Gruneisen EoS parameters for material
+PTYPE : M
+<INFO>
+Parameters for Mie-Gruneisen analytical equation of state.
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MATTHSOFT
+DESC : Thermal softening parameters
+PTYPE : M
+<INFO>
+Parameters to define the thermal softening of material.
+
+The shear strength of rock materials depends on temperature, reducing to zero at the melting temperature.  iSALE approximates this behavior using the simple relationship (after Ohnaka, 1995):
+\begin{equation}
+Y = Y_c\tanh\left(\xi\left(\frac{T_m}{T}-1\right)\right)
+\end{equation}
+where $Y_c$ is the cold yield strength (including the effect of damage) $Y$ is the thermally softened strength, $T$ is temperature, $T_m$ is the melt temperature and $\xi$ is a material constant.
+
+\begin{tabular}{lll}
+\hline
+Constant & Input parameter & Description \\
+\hline
+$\xi$ & TFRAC   & Constant in thermal softening law
+\end{tabular}
+
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MATTEMP
+DESC : Thermal parameters
+PTYPE : M
+<INFO>
+Parameters to define the thermal behavior of the material.
+
+iSALE uses the Simon approximation to define the melting temperature as a function of pressure $p$:
+\begin{equation}
+T_{m}=T_{m0}\left(\dfrac{p}{a}+1\right)^{1/c},
+\end{equation}
+where $T_{m0}$ is the melt temperature at zero pressure, $a$ and $c$ are material constants.
+
+\begin{tabular}{lll}
+\hline
+Constant & Input parameter & Description \\
+\hline
+$T_{m0}$ & TMELT0   & Melt temperature at zero pressure (K) \\
+$a$ & ASIMON   & Constant in Simon approximation \\
+$c$ & CSIMON   & Exponent in Simon approximation
+\end{tabular}
+
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_YINT
+DESC : Shear strength of intact material
+PTYPE : M
+<INFO>
+Parameters describing the shear strength envelope for intact material.
+The intact material strength, $Y_i$ is defined by:
+\begin{equation}
+Y_i=Y_{i0} + \frac{\mu_i p}{1 + \frac{\mu_i p}{Y_{im}-Y_{i0}}}
+\end{equation}
+where $p$ is the pressure and the constants in these equations are defined by the iSALE input parameters below:
+
+\begin{tabular}{lll}
+\hline
+Constant & Input parameter & Description \\
+\hline
+$Y_{i0}$ & YINT0   & Cohesion of intact material \\
+$\mu_i$  & FRICINT & Coefficient of internal friction for intact material \\
+$Y_{im}$ & YLIMINT & Limiting strength at high pressure for intact material \\
+\end{tabular}
+
+The equation above describes the material strength when using the LUNDI strength model and the intact strength $Y_i$ when using the rock strength model in conjunction with a damage model. 
+In this latter case, the yield strength $Y$ is computed from:
+\begin{equation}
+Y=Y_dD + Y_i(1.-D)
+\end{equation}
+where $D$ is a scalar measure of damage (0=intact; 1=damaged) that is computed by one of the damage models. 
+
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_YDAM
+DESC : Shear strength of damaged material
+PTYPE : M
+<INFO>
+Parameters describing the shear strength envelope for damaged material.
+
+The Drucker-Prager (DRPR) strength model defines the yield strength $Y$ as:
+\begin{equation}
+Y=min(Y_{0} + \mu p,Y_m)
+\end{equation}
+where $p$ is pressure. 
+
+The Lundborg strength model for damaged material (LUNDD) defines the yield strength $Y$ as:
+\begin{equation}
+Y=Y_0 + \frac{\mu p}{1 + \frac{\mu p}{Y_m-Y_0}}
+\end{equation}
+
+The constants in this equation are defined by the iSALE input parameters below:
+
+\begin{tabular}{lll}
+\hline
+Constant & Input parameter & Description \\
+\hline
+$Y_{0}$ & YDAM0   & Cohesion (yield strength at zero pressure) \\
+$\mu$   & FRICDAM & Coefficient of internal friction for material \\
+$Y_{m}$ & YLIMDAM & Limiting strength at high pressure
+\end{tabular}
+
+When the ROCK strength model is used, these material parameters define the strength envelope of the fully damaged material, $Y_d$:
+\begin{equation}
+Y_d=min(Y_{d0} + \mu_d p,Y_{dm})
+\end{equation}
+The yield strength $Y$ as a function of damage is then given by:
+\begin{equation}
+Y=Y_dD + Y_i(1.-D)
+\end{equation}
+where $D$ is a scalar measure of damage (0=intact; 1=damaged) that is computed by one of the damage models. 
+
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_YJC
+DESC : Shear strength as defined by Johnson-Cook model
+PTYPE : M
+<INFO>
+Parameters describing the shear strength envelope for metals.
+
+The complete Johnson-Cook strength model is defined as:
+\begin{equation}
+Y=\left(A+B\varepsilon^N\right)\left(1+C \ln \dot{\varepsilon}\right)\left[1-\left(\dfrac{T-T_{ref}}{T_m-T_{ref}}\right)^M\right],
+\end{equation}
+where $\varepsilon$ is the equivalent plastic strain, and $\dot{\varepsilon}$ is the strain rate, and $T$ is temperature.  If the temperature dependence is neglected (by choosing \verb+THSOFT = NONE+), this simplifies to:
+\begin{equation}
+Y=\left(A+B\varepsilon^N\right)\left(1+C \ln \dot{\varepsilon}\right)
+\end{equation}
+In these equations, $A$ is the yield strength at the reference state ($T=T_{ref},\varepsilon=0,\dot{\varepsilon}=1$), and is set by the input parameter \verb+JC_A+. 
+$B$ and $C$ are set by the input parameters \verb+JC_B+ and \verb+JC_C+, respectively. 
+The exponents $n$ is set in iSALE by \verb+JC_N+. 
+If the thermal softening term is switched on (\verb+THSOFT = NONE+), the melt temperature $T_m$ is defined by the input parameter \verb+TMELT0+). 
+\verb+JC_TREF+ is the reference temperature, $T_{ref}$ and the exponent $m$ is set by \verb+JC_M+. 
+
+Note that the original implementation of the Johnson-Cook strength model uses an alternative stress invariant 
+(the equivalent stress) that is a factor of $\sqrt{3}$ greater than $\sqrt{J_2}$.  
+To ensure consistency with the original Johnson-Cook model whilst still using the $J_2$ invariant the Johnson-Cook 
+strength in iSALE is reduced by a factor of $\sqrt{3}$ before being compared to the $\sqrt{J_2}$.
+
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MATDAM
+DESC : Damage parameters
+PTYPE : M
+<INFO>
+Parameters required to calculate damage accumulation.
+</INFO>
+</SECTION> 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_TENS
+DESC : Tensile strength parameters
+PTYPE : M
+<INFO>
+Parameters to define the tensile strength/failure of the material. Required only if the control parameter TENSILE is activated.
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MATPORE
+DESC : Material parameters for porosity model 
+PTYPE : M
+<INFO>
+See the appropriate section in the manual.
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_ACFL
+DESC : Material parameters for the acoustic fluidization model
+PTYPE : M
+<INFO>
+See the appropriate section in the manual.
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+<SECTION>
+ABBREV : MAT_DILAT
+DESC : Material parameters for the dilatancy model
+PTYPE : M
+<INFO>
+See the appropriate section in the manual.
+</INFO>
+</SECTION>
+ 
+++++++++++++++++++++++++++++++++++++++++++++++
+----------------------------------------------
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ACFL : STR
+DESC : Acoustic fluid. model
+<INFO>
+Sets the acoustic fluidization model used (see the relevant section below for more details):
+\begin{description}
+\item[NONE] No acoustic fluidization of the material.
+\item[BLOCK] Simple block-oscillation model.
+\item[MELOSH] Full Melosh (1979) model of acoustic fluidization (NOT iSALE3D).
+\end{description}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+VALUES : BLOCK : MELOSH : NONE
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ADVECT : INT
+DESC : Advect by mass or volume
+<INFO>
+This option specifies whether field variables are advected based on mass 
+(0, default) or volume (1) fluxes.  The use of mass fluxes is recommended.
+</INFO>
+SECTION : CONTROL
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 1
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : ALE_MODE : STRING
+DESC : Solver Mode
+<INFO>
+Lagrangian and Eulerian simulations are possible.
+Use this option to select the solution method.
+\begin{itemize}
+\item ALE\_MODE = EULER    - Eulerian solution; grid fixed, material flows through grid.
+
+\item ALE\_MODE = LAGRANGE - Lagrangian solution; grid moves with flow (not supported by iSALE-3D).
+
+\item ALE\_MODE = ALE - Continuous rezone ALE scheme (UNTESTED and not supported by iSALE-3D).
+\end{itemize}
+
+See SALE manual for more details.
+</INFO>
+SECTION : SETUP
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : EULER
+VALUES : EULER : LAGRANGE : ALE
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : EULER
+VALUES : EULER
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : ALPHA0 : DBLE
+DESC : Initial distension of porous material
+<INFO>
+Defines the initial distension of this material before compaction starts. The distension is defined by (1/(1-porosity)).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 1.D0:
+RRANGE: 1.D0 : 100.D0
+COL: 1 : 1
+TEST: NO
+</CODE>
+SECTION : MATPORE 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ALPHACRIT : DBLE
+DESC : Distension at which the dilatancy angle is zero
+<INFO>
+Defines the distension at which the dilatancy angle is zero. The dilatancy angle is positive for distensions below
+this value, implying a pressure (and porosity) increase in shear; the angle is negative for distensions less than 
+ALPHACRIT, implying a pressure and porosity decrease in shear.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 1.D0:
+RRANGE: 1.D0 : 100.D0
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MAT_DILAT 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ALPHAMAX : DBLE
+DESC : Maximum distension permitted
+<INFO>
+Defines the maximum distension that the material can achieve when going into tension or through dilatancy.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 1.D0:
+RRANGE: 1.D0 : 100.D0
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MAT_DILAT 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ALPHAMIN : DBLE
+DESC : Distension at which dilatancy is maximum
+<INFO>
+Defines the distension at (and below) which the dilatancy coefficient takes its maximum value. 
+If no value is supplied $\alpha_{min}$ is assumed to be 1; i.e., the dilatancy coefficient
+is maximum in the nonporous material. While this value is appropriate in most instances,
+$\alpha_{min} > 1$ may be appropriate when modelling granular materials that have a maximum
+dilatancy coefficient at maximum closest packing.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D0
+RANGE: 1.D0:
+RRANGE: 1.D0 : 100.D0
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MAT_DILAT 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ALPHAX : DBLE
+DESC : Distension at transtion from exponential to power-law compaction
+<INFO>
+Defines at which distension the compaction of the material starts to compact with a power-law. The compaction will follow a different course than before (exponential).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 1.D0:
+RRANGE: 1.D0 : 100.D0
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MATPORE 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANC : DBLE
+DESC : Alt. node coupler
+<INFO>
+Sets the alternate node coupler coefficent.
+This stability parameter is required in some instances to
+suppress noise along the symmetry axis, particularly in
+high-porosity calculations. See the original SALE manual
+for more details about the alternate node coupler; however,
+note that in iSALE the alternate node coupler is only
+applied close to the symmetry axis in cylindrical geometry - the
+amplitude of the alternate node coupling decays exponentially
+from the axis.
+</INFO>
+SECTION : STABILITY
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.D0
+RRANGE : 0.D0 : 2.D0
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANEND : INT
+DESC : ANEOS table number of density nodes
+<INFO>
+Number of nodes of the independent variable density in the equation of state table.
+
+Default is the size of existing ANEOS equation of state tables (120). Larger values will improve accuracy of table 
+but increase calculation time. 
+
+It is recommended that the number of nodes be divisible by 6, as the density range is divided into six sections 
+with different (linear/logarithmic) spacings.
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 120
+RANGE : 0 : 
+RRANGE : 0 : 480
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANENT : INT
+DESC : ANEOS table number of thermal nodes
+<INFO>
+Number of nodes of the thermal (temperature or internal energy) independent variable in the equation of state table.
+
+Default is the size of existing ANEOS equation of state tables (60). Larger values will improve accuracy of table 
+but increase calculation time. 
+
+It is recommended that the number of nodes be divisible by 6, as one sixth of the nodes are used to cover the 
+range from zero to the reference temperature/energy.
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 60
+RANGE : 0 : 
+RRANGE : 0 : 480
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANETABLE : STR
+DESC : ANEOS table option
+<INFO>
+Selects whether to read (READ) or create (MAKE) an ANEOS-derived equation of state table.
+
+The default behaviour is to read a table, in which case the table is expected to be stored in the file <eosname>.aneos.
+
+Selecting MAKE tells iSALE to use ANEOS to generate the table, in which case the ANEOS input file <eosname>.input 
+is read. Table generation can be customised using a number of additional options:
+
+\begin{itemize}
+\item ANEVAR - Independent variables for table (TmpDen or SieDen).
+\item ANENT - Number of thermal (temperature or internal energy) nodes in the table.
+\item ANEND - Number of density nodes in the table.
+\item ANROMIN - Minimum density in table.
+\item ANROMAX - Maximum density in table.
+\item ANTMIN - Minimum temperature in table (TmpDen).
+\item ANTMAX - Maximum temperature in table (TmpDen). 
+\item ANSIEMIN - Minimum internal energy in table (SieDen).
+\item ANSIEMAX - Maximum intenral energy in table (sieDen).
+\end{itemize}
+
+Note that ANEOS table generation/customisation is not well tested and users should modify values from the default
+ with caution.
+
+Also note that the ANEOS tables provided in the repository were generated using an older version of ANEOS, so 
+.input and .aneos files should not be used interchangably. 
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+VALUES : MAKE : READ
+DEFVAL : READ
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANEVARS : STR
+DESC : ANEOS table independent variables
+<INFO>
+Selects whether temperature (and density; TmpDen) or specific internal energy (and density; SieDen) should 
+be used to construct the ANEOS-derived equation of state table.
+
+The default behaviour is to use temperature and this is the recommended option.
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+VALUES : TmpDen : SieDen
+DEFVAL : TmpDen
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANGLE2 : DBLE
+DESC : object trajectory angle (Y-Z)
+<INFO>
+This defines the angle of impact in degrees, relative to the horizontal 
+(X-Y) plane measured in the Y-Z (D-V) plane. Note that 90 degrees is
+vertically upward, requiring a negative impact velocity for the object to
+move downward.
+</INFO>
+<CODE>
+DIM : 3
+RANGE : 0.D0 : 180.D0
+OPTIONAL : YES
+DEFVAL : 0.D0
+</CODE>
+SECTION : OBJECT
+</PARAM>  
+----------------------------------------------
+<PARAM>
+ABBREV : ANGLE : DBLE
+DESC : object trajectory angle (X-Z)
+<INFO>
+This defines the angle of impact in degrees, relative to the horizontal 
+(X-Y) plane measured in the X-Z (H-V) plane. For simulations using bilateral 
+symmetry this is the only impact angle to set. Note that 90 degrees is
+vertically upward, requiring a negative impact velocity for the object to
+move downward.
+</INFO>
+SECTION : OBJECT
+<CODE>
+DIM : 3
+OPTIONAL : YES
+RANGE : 0.D0 : 180.D0
+DEFVAL : 90.D0
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : ANROMAX : DBLE
+DESC : Maximum density in ANEOS table
+<INFO>
+Maximum density (kg/m$^3$) for the ANEOS table. Positive values are interpretted as absolute density; negative
+values are interpreted as density relative to the reference density (i.e., -10. implies a maximum density of ten
+times the reference density).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : -10.D0
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANROMIN : DBLE
+DESC : Minimum density in ANEOS table
+<INFO>
+Absolute value of the minimum density (kg/m$^3$) for the ANEOS table.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 1.D-6
+RANGE : 1.D-9 : 
+RRANGE : 1.D-6 : 1.D-3 
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANSIEMAX : DBLE
+DESC : Maximum specific internal energy in ANEOS table
+<INFO>
+Absolute value of the maximum specific internal energy (J/kg) for the ANEOS table. 
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 6.D8
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANSIEMIN : DBLE
+DESC : Minimum specific internal energy in ANEOS table
+<INFO>
+Absolute value of the minimum specific internal energy (J/kg) for the ANEOS table.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 1.D1
+RANGE : 0.D0 : 
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANTMAX : DBLE
+DESC : Maximum temperature in ANEOS table
+<INFO>
+Absolute value of the maximum temperature (K) for the ANEOS table. The default value is that used to produce
+the ANEOS tables in the repository (86,700K).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 8.67D4
+RANGE : 8.D4 : 
+RRANGE : 8.D4 : 2.D5 
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ANTMIN : DBLE
+DESC : Minimum temperature in ANEOS table
+<INFO>
+Absolute value of the minimum temperature (K) for the ANEOS table.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 1.D0
+RANGE : 1.D0 : 
+RRANGE : 1.D0 : 273.D0 
+</CODE>
+SECTION : MAT_ANEOS
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ASIMON : DBLE
+DESC : Constant in Simon approximation
+<INFO>
+Constant in Simon approximation, see manual for exact formula.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MATTEMP
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : AVIS2 : DBLE
+DESC : Art. visc. (quad.)
+<INFO>
+This is one of two parameters controlling the amount of artificial dissipation
+that is used to suppress unphysical oscillations behind the shock wave in
+shock simulations. This coefficient defines the quadratic term of the artificial
+viscosity.
+Please refer to the iSALE manual for details. A value of 1.2 is recommended
+(and used as default). It is recommended that new users explore the
+sensitivity of their simulation results to these parameters if they
+are simulating strong shock problems.
+</INFO>
+SECTION : STABILITY
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.2D0
+RRANGE : 0.D0 : 2.D0
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : AVIS : DBLE
+DESC : Art. visc. (lin)
+<INFO>
+This is one of two parameters controlling the amount of artificial dissipation
+that is used to suppress unphysical oscillations behind the shock wave in
+shock simulations. This coefficient defines the linear term of the artificial
+viscosity.
+Please refer to the iSALE manual for details. A value of 0.24 is recommended
+(and used as default). A higher linear term may be required in simulations
+using high-porosity material.  It is recommended that new users explore the
+sensitivity of their simulation results to these parameters if they are
+simulating strong shock problems.
+</INFO>
+SECTION : STABILITY
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.24D0
+RRANGE : 0.D0 : 2.D0
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BDTPRES : DBLE
+DESC : Brittle-ductile trans. pres.
+<INFO>
+This parameter defines the brittle-ductile transition pressure (Pa).
+Set this value to -1 for automatic calculation.
+
+The COLLINS damage model computes damage D resulting
+from both tensile and shear failure.
+
+For a detailed description and the exact formulas see manual.
+
+Parameters required for this model are: BDTPRES, BPTPRES,YTENS0
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MATDAM
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BLOCK_BOT : INT
+DESC : distance between bottom of sliding block and reference layer
+<INFO>
+The distance between the bottom extent of the sliding body and the
+reference layer is defined by BLOCK\_BOT. This parameter is optional. 
+Its default value is '0' which means that the sliding body is placed
+directly on top of the reference plane.
+A positive value for BLOCK\_BOT shifts the slide body up (if possible,
+the body is always placed in a way that the lower right corner of the
+sliding block touches the slope). A negative value indicates a slide
+body below the reference plane.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 0
+TEST : SLOPE
+</CODE>
+SECTION : SLOPE
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BLOCK_LAY : INT
+DESC : reference layer for sliding block
+<INFO>
+For the sliding body we need to define a reference plane, too. This
+parameter is optional. If not given, the same plane is used as for
+the slope.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+TEST : SLOPE
+</CODE>
+SECTION : SLOPE
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BND_BK : STRING
+DESC : back bound. cond.
+<INFO>
+This parameter controls the boundary condition on the back.
+It is an optional parameter with the default value being FREESLIP in 3D.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : FREESLIP
+VALUES : FREESLIP : NOSLIP : OUTFLOW
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BND_B : STRING
+DESC : bottom bound. cond.
+<INFO>
+This parameter controls the boundary condition on the bottom.
+It is an optional parameter with the default value being NOSLIP in
+2D and 3D.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : NOSLIP
+VALUES : FREESLIP : NOSLIP : OUTFLOW : FREESURFACE : FREESURF : SQSHEAR
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : NOSLIP
+VALUES : FREESLIP : NOSLIP : OUTFLOW
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BND_F : STRING
+DESC : front bound. cond.
+<INFO>
+This parameter controls the boundary condition on the front.
+It is an optional parameter with the default value being FREESLIP in 3D.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : FREESLIP
+VALUES : FREESLIP : NOSLIP : OUTFLOW
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BND_L : STRING
+DESC : left bound. cond.
+<INFO>
+This parameter controls the boundary condition on the left side.
+It is a mandatory parameter with the default value being FREESLIP in 2D
+and OUTFLOW in 3D.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : NO
+DEFVAL : FREESLIP
+VALUES : FREESLIP : NOSLIP : OUTFLOW : FREESURFACE : FREESURF : SQSHEAR : PRESQUASH
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : NO
+DEFVAL : OUTFLOW
+VALUES : FREESLIP : NOSLIP : OUTFLOW
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BND_R : STRING
+DESC : right bound. cond.
+<INFO>
+This parameter controls the boundary condition on the right side.
+It is an optional parameter with the default value being OUTFLOW in
+2D and 3D.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : OUTFLOW
+VALUES : FREESLIP : NOSLIP : OUTFLOW : FREESURFACE : FREESURF : SQSHEAR : PRESQUASH
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : OUTFLOW
+VALUES : FREESLIP : NOSLIP : OUTFLOW
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BND_T : STRING
+DESC : top bound. cond.
+<INFO>
+This parameter controls the boundary condition on the top.
+It is an optional parameter with the default value being OUTFLOW in
+2D and 3D.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : OUTFLOW
+VALUES : FREESLIP : NOSLIP : OUTFLOW : FREESURFACE : FREESURF : SQSHEAR : PRESQUASH : TOPSQUASH
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : OUTFLOW
+VALUES : FREESLIP : NOSLIP : OUTFLOW
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BNDYIELD : STRING
+DESC : Yield in mixed cells
+<INFO>
+This option specifies how the yield strength of mixed cells is determined...
+
+\begin{itemize}
+\item min   - The strength of the cell is set equal to the lowest material strength
+\item med   - The strength of the cell is the volume-weighted average of all material strengths.
+\item const - The strength of the cell is set equal to a constant value, defined by the control parameter BNDYLDVAL
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : min
+VALUES : min : med : const
+</CODE>
+SECTION : CONTROL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BNDYLDVAL : DBLE
+DESC : Yield val in mixed cells
+<INFO>
+This option specifies the yield strength (in Pa) of mixed cells that is 
+required if the BNDYIELD parameter is defined as 'const' (i.e., that 
+mixed cells should all be assigned a constant strength).  This model can 
+be used to (crudely) define material interfaces as weak or strong surfaces.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.D0
+</CODE>
+SECTION : CONTROL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : BPTPRES : DBLE
+DESC : Brittle-plastic trans. pres.
+<INFO>
+This parameter defines the brittle-ductile transition pressure (Pa).
+Set this value to -1 for automatic calculation.
+
+The COLLINS damage model computes damage D resulting
+from both tensile and shear failure.
+
+For a detailed description and the exact formulas see manual.
+
+Parameters required for this model are: BDTPRES, BPTPRES,YTENS0
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MATDAM
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : CHI: DBLE
+DESC : Sound speed ratio
+<INFO>
+This parameter defines the ratio of porous to solid material
+sound speed at zero pressure.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 0.D0 :
+RRANGE: 1.D0 :
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MATPORE
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : COL_SITE : INT
+DESC : Collision location (cells from bottom)
+<INFO>
+Specifies the vertical location of the collision point in cells from the 
+base of the mesh, which defines the origin of the physical co-ordinate
+system in the simulation. This parameter is required if there is no target
+(LAYNUM = 0).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : CSIMON : DBLE
+DESC : Exp. for Simon approx.
+<INFO>
+Exponent in Simon approximation, see manual for exact formula.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MATTEMP
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : CVIB : DBLE
+DESC : Vib. vel. fraction
+<INFO>
+Vibration velocity as a fraction of particle velocity. The vibrational
+pressure as a fraction of the peak shock pressure will be the square of
+CVIB.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.1D0
+RANGE : 0.D0 : 
+RRANGE : 0.D0 : 0.2D0
+</CODE>
+SECTION : ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : CYL : DBLE
+DESC : Cylindrical symmetry flag
+<INFO>
+This is a required parameter for iSALE2D only. It defines the geometry 
+of the mesh as either plane strain (when set to 0.) or cylindrical symmetry 
+(when set to 1). The default is cylindrical symmetry. 
+</INFO>
+SECTION : MESH
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1.D0
+VALUES : 0. : 1.
+COL: 1:1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DAMDEP : STR
+DESC : Damage model
+<INFO>
+Sets the damage model strain dependence (see the relevant section below for more details):
+\begin{description}
+\item[LIN] - Damage has linear dependence on plastic strain $D=\min(\frac{\epsilon_p}{\epsilon_f},1)$.
+\item[EXP] - Damage has weaker dependence on plastic strain $D=1-\exp(\frac{-\epsilon_p}{\epsilon_f})$.
+\end{description}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+VALUES : LIN : EXP 
+DEFVAL : LIN
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DAMMOD : STR
+DESC : Damage model
+<INFO>
+Sets the damage model used (see the relevant section below for more details):
+\begin{description}
+\item[NONE]    - No damage model; material remains intact.
+\item[SIMPLE]  - Shear failure model with constant failure strain.
+\item[IVANOV]  - Shear failure model with pressure-dependent failure strain.
+\item[COLLINS] - Combined shear and tensile failure model with brittle, semi-brittle and ductile shear failure regimes.
+\end{description}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+VALUES : COLLINS : IVANOV : SIMPLE : NONE
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DILATCOEF : DBLE
+DESC : Maximum dilatancy coefficient
+<INFO>
+The maximum dilatancy coefficient $\beta_{max}$. That is, the positive dilatancy 
+coefficient at zero pressure, temperature and porosity. $\beta$ is defined in iSALE as:
+\begin{equation*}
+\beta = \frac{\dot{\epsilon}_v}{\dot{\gamma}_p} = \frac{d\epsilon_v}{d\gamma_p},
+\end{equation*}
+where $\gamma_p$ is the accumulated plastic shear strain strain given by 
+$\gamma_p = \int \sqrt{2\dot{\epsilon}^p_{ij}\dot{\epsilon}^p_{ij}} \ dt$ 
+and $\dot{\epsilon}^p_{ij}$ is the deviatoric plastic strain rate tensor.  
+For triaxial deformation ($\dot{\epsilon}_2=\dot{\epsilon}_3$), $\beta$ and $\psi$ are related by: 
+\begin{equation*}
+\beta = \frac{2\sqrt{3}\sin\psi}{3-\sin\psi};
+\label{eq:beta_psi}
+\end{equation*}
+for simple shear deformation ($\dot{\epsilon}_2=0$), $\beta \approx \sin\psi$.
+$\beta$ can also be expressed in terms of $\frac{d\epsilon_v}{d\epsilon_1}$:
+\begin{equation*}
+\beta = \frac{\sqrt{3}\frac{d\epsilon_v}{d\epsilon_1}}{\frac{d\epsilon_v}{d\epsilon_1}-3}.
+\end{equation*}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 0.D0 :
+RRANGE: 0.D0 : 1.D0
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MAT_DILAT 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DILATEPSFAC : DBLE
+DESC : Strain exponent in dilatancy angle
+<INFO>
+Exponent defining the strain dependence of the dilatancy angle in the STRAINPT model.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 0.D0 :
+RRANGE: 0.D0 : 100.D0
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MAT_DILAT 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DILATFRIC : DBLE
+DESC : Friction coeff. (dilatancy)
+<INFO>
+Coefficient of internal friction for fully dilatant material, currently only 
+used with dilatancy model in conjunction with the strength models:
+\begin{description}
+ \item[ROCK]  - Coefficient of internal friction for damaged material
+\end{description}
+The variable is optional; if it is not set, the friction coefficient is assumed
+to be independent of porosity. If it is set, the damaged material friction
+coefficient is assumed to vary linearly with distension between FRICDAM and DILATFRIC.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_DILAT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DILATOLER : DBLE
+DESC : Tolerance for option dilatancy model iteration
+<INFO>
+For increased accuracy in the dilatancy model it is possible to iterate on
+the plastic strain increment when relaxing to the yield envelope. Non-zero values
+DILATOLER specify the relative plastic strain that must be achieved for the
+iteration to converge. For impact simulations this option is not necessary. For
+high-precision models, e.g., triaxial experiment simulations a value of $10^{-6}$
+has proved successful.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.D0
+RANGE: 0.D0 : 1.D0
+RRANGE: 1.D-6 : 1.D-3
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MAT_DILAT 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DILATPLIM : DBLE
+DESC : Critical dilatancy suppression pressure
+<INFO>
+Pressure at (and above) which the dilatancy angle is zero. In Pascals.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 0.D0 : 
+RRANGE: 0.D0 : 1.D9
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MAT_DILAT 
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DILMOD : STR
+DESC : Dilatancy model
+<INFO>
+Sets the dilatancy model used (see the relevant section below for more details):
+\begin{description}
+\item[NONE] - No dilatancy model; no porosity increase in shear.
+\item[CONST] - Dilatancy coefficient $\beta$ is constant.
+\item[ALPHA] - Dilatancy coefficient decreases with distension $\beta(\alpha)$.
+\item[ALPHAT] - Dilatancy coefficient decreases with distension and temperature $\beta(\alpha,T)$.
+\item[ALPHAP] - Dilatancy coefficient decreases with distension and pressure $\beta(\alpha,P)$.
+\item[ALPHAPT] - Dilatancy coefficient decreases with distension, pressure and temperature $\beta(\alpha,P,T)$.
+\item[STRAINPT] - Dilatancy coefficient decreases with strain, pressure and temperature $\beta(\epsilon_p,P,T)$.
+\end{description}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+VALUES : CONST : ALPHA : ALPHAT : ALPHAP : ALPHAPT : STRAINPT : NONE
+DEFVAL : NONE
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DIMENSION : INT
+DESC : Code identifier
+<INFO>
+With this parameter you identify whether the setup
+provided with this input-file is designed for
+two-dimensional (DIMENSION=2) or three-dimensional (3)
+simulations.
+This is required to let iSALE perform intensive tests
+whether the setup and all parameters are valid.
+</INFO>
+SECTION : GENERAL
+<CODE>
+DIM : 1
+OPTIONAL : NO
+VALUES : 2 : 3
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : D_LITH : DBLE
+DESC : Lithospheric thickness (for thermal profile)
+<INFO>
+This parameter sets the lithospheric thickness in metres, which is used if a 
+conductive/convective geotherm is set (see LAYTPROF).  This defines the 
+distance from the surface to the base of the conductive region (the top of 
+the convecting region). The default value is 80 km (80.D3), a reasonable 
+value for Earth.  To review the thermal profile, users can plot the 
+depth-temperature initial conditions stored in <MODELNAME>/SETUP/temperature.txt
+NB thermal conduction and convection are NOT included 
+in the model; these terms just refer to the physics controlling the 
+temperature gradient at those depths.
+</INFO>
+SECTION : GRADIENT
+<CODE>
+DIM : 1
+RANGE : 0.D0 :
+RRANGE : 100.D0 : 800.D3
+OPTIONAL : YES
+DEFVAL : 80.0D3
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : DTDZSURF : DBLE
+DESC : Near-surface temperature gradient (for thermal profile)
+<INFO>
+This parameter sets the near-surface geothermal gradient dT/dz in 
+degrees K per metre (K/m), which is used if any type of geotherm is set 
+(see LAYTPROF).  The default is 10 K/km, which is a typical continental 
+geothermal gradient on Earth.
+</INFO>
+SECTION : GRADIENT
+<CODE>
+DIM : 1
+RANGE : 0.D0 :
+OPTIONAL : YES
+DEFVAL : 10.0D-3
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : DTMAX : DBLE
+DESC : Max. time incr.
+<INFO>
+This parameter defines the maximum time increment in seconds.
+Note that iSALE limits the timestep according to the CFL condition,
+where the maximum permitted timestep size is the time that soundwaves
+travelling in the same direction as the fluid flow would take to travel
+one fifth of the minimum cell dimension.
+
+DTMAX will only limit the timestep if it is smaller than the CFL-limited 
+timestep size.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+</CODE>
+SECTION : TIME
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DT : DBLE
+DESC : Initial timestep
+<INFO>
+This parameter defines the initial timestep size DT in seconds.
+Note that iSALE limits the timestep according to the CFL condition,
+where the maximum permitted timestep size is the time that soundwaves
+travelling in the same direction as the fluid flow would take to travel
+one fifth of the minimum cell dimension.
+DT and DTMAX will only limit the timestep if they are smaller than the CFL-limited 
+timestep size.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+</CODE>
+SECTION : TIME
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DTSAVE : DBLE
+DESC : save interval
+<INFO>
+Time interval between data saving cycles. Positive values are interpreted
+as absolute intervals in seconds of model time. A negative value sets the
+save interval to $|DTSAVE|$ multiplied by scaled model time. Model time is
+made non-dimensional by scaling by $2 U t = a$, where $U$ is the impact
+velocity and $a$ is projectile radius. In the case of multiple objects the
+scale factor is taken as the smallest $a = U$.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE : :
+</CODE>
+SECTION : TIME
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : DUMP : STR
+DESC : Restart with dump
+<INFO>
+iSALE saves checkpoint files from which a simulation run may be restarted;
+either to extend the runtime of a model or to recover from a problem with
+a given run. The default time between checkpoint dumps is 1000 cycles of the
+main loop in the model, other times can be set through the parameter TDUMP. 
+A final checkpoint dumpfile is written at the end of the simulation.
+The compressed dumpfile restart.dump.gz is written to the same directory as
+the <MODEL>.dat. The dumpfile must be unzipped (e.g. with the command gunzip
+restart.dump.gz) to give a large restart.dump file.
+
+The DUMP string is by default set to NONE. Other values will cause iSALE
+to search for a dumpfile in the same directory that it is run from.
+The default dumpfile produced will be named restart.dump and this string
+should be used; other filenames ending in .dump are allowed.
+If restarting in order to increase the runtime of a simulation
+the value of TEND should be increased.
+</INFO>
+<CODE>
+OPTIONAL : YES
+DEFVAL : NONE
+DIM : 1
+</CODE>
+SECTION : GENERAL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : EOSNAME : STR
+DESC : EOS name
+<INFO>
+For each material an equation of state (EOS) must be definded.
+The identifier that needs to be provided has to consist of
+7 characters and match the filename of an EOS file.
+Available EOS files (aneos and tillo) are included in the
+iSALE repository in the eos directory.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : EOSTYPE : STR
+DESC : EOS type
+<INFO>
+Parameter to define which eos type should be used (aneos or tillotson).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+VALUES : aneos : tillo
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : EPDV : DBLE
+DESC : Acoustic fluidization regeneration coefficient (volume)
+<INFO>
+A regeneration efficiency parameter. The fraction of PdV work converted to acoustic energy. 
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.D0
+RANGE : 0.D0 : 1.D0
+RRANGE : 0.D0 : 0.1D0
+</CODE>
+SECTION : MAT_ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : EPSE0 : DBLE
+DESC : Elastic vol.strain threshold
+<INFO>
+Defines the elastic regime compaction regime which occurs for volumetric
+strains up to an elastic threshold strain (EPSE0). A closure of pores does
+not begin until a critical volumetric strain (EPSE0) is reached.
+It defines a plastic yield threshold below which volume changes are
+elastic and above which compaction (permanent pore collapse) occurs.
+It is negative in compression. 
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: -1.D+4 : 0.D0
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MATPORE
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : EPS_MIN : DBLE
+DESC : Volume fraction cutoff
+<INFO>
+Sets the volume fraction cutoff. If the volume fraction in a cell
+is less than EPS\_MIN, that material component is removed from the cell.
+If the volume fraction in a cell is more than 1.-EPS\_MIN, that material
+component is assumed to completely fill the cell.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1.D-6
+RANGE : 0.D0 : 1.D0
+RRANGE : 1.D-8 : 1.D-4
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 1.D-5
+RANGE : 0.D0 : 1.D0
+RRANGE : 1.D-8 : 1.D-4
+</CODE>
+SECTION : STABILITY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ERATE_CUT : DBLE
+DESC : Strain rate cutoff.
+<INFO>
+Any cell with a strain rate below ERATE\_CUT will not generate any new acoustic vibrations.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D-3
+RANGE : 0.D0 : 
+</CODE>
+SECTION : ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ESHEAR : DBLE
+DESC : Acoustic fluidization regeneration coefficient (shear)
+<INFO>
+A regeneration efficiency parameter. The fraction of shear deformational energy converted to acoustic energy. 
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D-1
+RANGE : 0.D0 : 1.D0
+RRANGE : 0.D0 : 0.1D0
+</CODE>
+SECTION : MAT_ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : FAILSTRN : DBLE
+DESC : Pl. strain at failure constant
+<INFO>
+The SIMPLE damage model prescribes damage D as a linear function of plastic strain.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MATDAM
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : FORMAT : STR
+DESC : Output format
+<INFO>
+Sets the format that calculated data will be stored in.
+Currently the only allowed value is 'J'. The J option uses
+JPEG compression to reduce the size of the datafile.
+The QUALITY parameter is used to control the level of compression.
+Higher QUALITY values lead to less compression, larger files but
+give more accurate output.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : J
+</CODE>
+SECTION : GENERAL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : FRICDAM : DBLE
+DESC : Friction coeff. (damaged)
+<INFO>
+Coefficient of internal friction for damaged material, used in the strength models:
+\begin{description}
+ \item[ROCK]  - Coefficient of internal friction for damaged material
+ \item[DRPR]  - Coefficient of internal friction for material
+ \item[LUNDD] - Coefficient of internal friction for material
+\end{description}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YDAM
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : FRICINT : DBLE
+DESC : Friction coeff. (intact)
+<INFO>
+Parameter for the coefficient of internal friction, used in the strength models:
+\begin{itemize}
+ \item ROCK - Coefficient of internal friction for intact material
+ \item LUNDI - Coefficient of internal friction for material
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YINT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GAMBETA : DBLE
+DESC : gam_beta
+<INFO>
+This parameter describes the duration of the vibrations
+and is scaled with the projectile size.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+</CODE>
+SECTION : MAT_ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GAMETA : DBLE
+DESC : gam_eta
+<INFO>
+This parameter describes the strength of the
+vibrations (the lower, the stronger the shaking).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+</CODE>
+SECTION : MAT_ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRAD_DIM : INT
+DESC : gradient dimension
+<INFO>
+Increasing pressure, density, and energy with depth can be considered when GRAD\_DIM>0.
+
+\begin{itemize}
+\item GRAD\_DIM = 0 - No gradient calculated.
+\item GRAD\_DIM = 1 - One-dimensional gradient in the target (vertical direction only)
+\item GRAD\_DIM = 2 - Two-dimensional gradient in the target (vertical and X-direction only)
+\item GRAD\_DIM = 3 - Three-dimensional gradient in the target (all directions)
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+RANGE : 0 : 3
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRAD_H : INT
+DESC : 1D gradient horizontal location
+<INFO>
+Horizontal location of gradient calculation, if GRAD\_DIM = 1. 
+Default is 1 (i.e. the symmetry axis). Should be within the high resolution zone.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+RANGE : 0 : 
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRAD_OBJ : INT
+DESC : Which objects to include in gradient calc.
+<INFO>
+Set this to 0 (default) if none of the objects should be included in the gradient calculation.
+Set to 1 if all objects should be included in the gradient calculation.
+If set to N>1, then the first N-1 objects will be excluded from the gradient calculation. I.e., if set
+to 2, the first object will be excluded from the gradient calculation.
+</INFO>
+<CODE>
+OPTIONAL : YES
+DEFVAL : 0
+RANGE : 0 : 10
+DIM : 1
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRAD_TYPE : STR
+DESC : Lithostatic gradient
+<INFO>
+Several different options are available to pre-compress the target/planet
+as a consequence of the ambient gravitational field...
+
+\begin{description}
+\item[NONE] -- No gravity field; constant initial material properties
+
+\item[DEFAULT] -- Spatially and temporally constant gravity field; initial material 
+            properties change with depth in target.
+
+\item[CENTRAL] -- Spatially varying gravity field, but constant in time. For
+            use in S\_TYPE == PLANET mode. Initial material properties change 
+            with distance from planet centre.
+
+\item[SELF] -- Spatially and temporally varying gravity field, calculated
+            from mutual gravitational attraction of all mass in domain.
+            Initial material properties change according to gravity field.
+            (Not currently available in iSALE-3D).
+\end{description}
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : DEFAULT
+VALUES : DEFAULT : NONE : CENTRAL : SELF
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : DEFAULT
+VALUES : DEFAULT : NONE : CENTRAL
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRAV_D : DBLE
+DESC : Gravitational acceleration (third dimension)
+<INFO>
+This option sets the gravitational acceleration (in $m/s^2$). This option 
+should be set to 0. or omitted, if GRAD\_TYPE is not DEFAULT.
+</INFO>
+<CODE>
+OPTIONAL : YES
+DEFVAL : 0.D0
+DIM : 3
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRAV_H : DBLE
+DESC : Gravitational acceleration (horizontal)
+<INFO>
+This option sets the gravitational acceleration (in $m/s^2$). This option 
+should be set to 0. or omitted, if GRAD\_TYPE is not DEFAULT.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.D0
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRAV_V : DBLE
+DESC : Gravitational acceleration (vertical)
+<INFO>
+This option sets the gravitational acceleration (in $m/s^2$). This option 
+should be set to 0. or omitted, if GRAD\_TYPE is not DEFAULT.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.D0
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRIDD : INT
+DESC : depth cells
+<INFO>
+The number of cells in the mesh in the other horizontal direction. 
+Three values are required, describing the number of cells in: the front 
+extension zone; the high-resolution zone; the back extension zone. Note
+that for 3D impact simulations that use bilateral symmetry (i.e., the
+front face of the mesh is a plane of symmetry) the number of cells in
+the front extension zone should be set to zero.
+</INFO>
+SECTION : MESH
+<CODE>
+DIM : 3
+OPTIONAL : NO
+RANGE : 0 : 
+RRANGE: 0: 10000
+COL: 1:3
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRIDEXT : DBLE
+DESC : grid extension parameter
+<INFO>
+The extension factor for increasing cell dimension in the extension zones.
+This parameter will only be used if you have allocated any extension cells
+in GRIDH or GRIDV. Outside of the high-resolution zone, the height or width
+of adjacent cells will increase by this factor up to a maximum value which
+can be set by GRIDSPCM.
+
+To calculate the space the extension zone occupies in meters, you can use
+either
+\begin{align*}\mathrm{GRIDSPC}\times\sum_{k=1}^{n}\mathrm{GRIDEXT}^k
+\end{align*}
+or just
+\begin{align*}
+\frac{\mathrm{GRIDEXT} (\mathrm{GRIDEXT}^n - 1)}{\mathrm{GRIDEXT}
+- 1}\times\mathrm{GRIDSPC}
+\end{align*}
+where $n$ is the number of
+cells in the extension zone.
+\begin{figure}
+\includegraphics[width=\textwidth]{figs/mesh.png}
+\label{fig:mesh}
+\end{figure}
+</INFO>
+SECTION : MESH
+<CODE>
+DIM : 1
+OPTIONAL : YES
+RANGE : 1.D0 : 
+RRANGE : 1.02D0 : 1.08D0
+DEFVAL : 1.04D0
+COL: 1:1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRIDH : INT
+DESC : horizontal cells
+<INFO>
+The number of cells in the mesh in the horizontal direction. Three values 
+are required, describing the number of cells in: the left extension zone; 
+the high-resolution zone; the right extension zone. Note that if cylindrical 
+geometry is used (see CYL), the number of cells in the left extension zone 
+should be set to zero, as the left edge of the mesh is the axis of symmetry.
+</INFO>
+SECTION : MESH
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE : 0 : 
+RRANGE: 0: 10000
+COL: 1:3
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRIDSPCM : DBLE
+DESC : Maximum grid spacing
+<INFO>
+If using extensional cells, then you can set a maximum grid spacing in 
+the extension zones in each coordinate direction. Again, defining one 
+value applies the same maximum spacing in all coordinate directions.
+Positive numbers are absolute dimensions in metres; negative numbers are 
+interpreted as relative dimensions---i.e. the maximum cell dimension is 
+|GRIDSPCM|*GRIDSPC. For example, setting GRIDSPCM to -5 would limit the 
+size of cells the extension zone to five times the grid spacing in the 
+high-resolution zone. 
+</INFO>
+SECTION : MESH
+<CODE>
+DIM : 1
+OPTIONAL :YES
+DEFVAL : -20.D0
+COL: 1:3
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRIDSPC : DBLE
+DESC : grid spacing
+<INFO>
+The real-life spacing of cells in the high-resolution zone in metres. 
+Two (or three) spacings can be defined: the first is the cell size in 
+the horizontal direction; the second is the cell size in the vertical 
+direction; the third is the cell size in the third dimension.  
+If only one value is defined, the same spacing will be used for all 
+coordinate directions.
+
+Note that when regridding (iSALE2D only), GRIDSPC is used to define 
+the dimensions of the cell in the new grid; however, the only permissable 
+values for GRIDSPC in this case are two times the GRIDSPC in the run 
+</INFO>
+SECTION : MESH
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE : 1.D-9 :
+RRANGE: 1.D-6 : 1.D6
+COL: 1:3
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : GRIDV : INT
+DESC : vertical cells
+<INFO>
+The number of cells in the mesh in the vertical direction. Three values 
+are required, describing the number of cells in: the bottom extension zone; 
+the high-resolution zone; the top extension zone.
+</INFO>
+SECTION : MESH
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE : 0 : 
+RRANGE: 0: 10000
+COL: 1:3
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : INVSRC : DBLE
+DESC : Strainrate invariant constant
+<INFO>
+This option specifies the constant $\zeta$ in the equation for the second invariant of the strainrate tensor used in iSALE2D.
+\begin{equation}
+\dot{\epsilon}=\zeta\sqrt{\frac{1}{6}\left[\left(\dot{\epsilon}_{xx}-\dot{\epsilon}_{yy}\right)^2 + \left(\dot{\epsilon}_{yy}-\dot{\epsilon}_{\theta}\right)^2 
++ \left(\dot{\epsilon}_{\theta}-\dot{\epsilon}_{xx}\right)^2\right] +\dot{\epsilon}_{xy}^2}
+\end{equation}
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1.D0
+RRANGE : 1.D0 : 2.D0
+RANGE  : 0.D0 : 
+</CODE>
+SECTION : CONTROL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ISOLATE : INT
+DESC : Isolated treatment
+<INFO>
+This parameter controls how isolated material is treated.
+Currently, only 0 (ignore isolated matter) and 1 (calculate
+position of isolated matter) is available.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+VALUES : 0 : 1
+</CODE>
+SECTION : STABILITY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : JC_A : DBLE
+DESC :  Shear strength of material at reference state according to Johnson-Cook strength model
+<INFO>
+
+This parameter defines the yield strength at the reference state ($T=T_{ref},\varepsilon=0,\dot{\varepsilon}=1$).
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YJC
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : JC_B : DBLE
+DESC :  Shear strength coefficient controlling strain dependence according to Johnson-Cook strength model
+<INFO>
+
+This parameter defines how much the yield strength changes as a function of plastic strain ($\varepsilon$).
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YJC
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : JC_C : DBLE
+DESC :  Shear strength coefficient controlling strain rate dependence according to Johnson-Cook strength model
+<INFO>
+
+This parameter defines how much the yield strength changes as a function of strain rate ($\dot{\varepsilon}$).
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YJC
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : JC_M : DBLE
+DESC : Exponent in thermal softening term of Johnson-Cook strength model
+<INFO>
+
+This parameter defines the exponent in the thermal softening term of the Johnson-Cook strength model. 
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YJC
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : JC_N : DBLE
+DESC :  Shear strength exponent controlling strain dependence according to Johnson-Cook strength model
+<INFO>
+
+This parameter defines how rapidly the yield strength changes as a function of plastic strain ($\varepsilon$).
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YJC
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : JC_TREF : DBLE
+DESC : Reference temperature for Johnson-Cook strength model
+<INFO>
+
+This parameter defines the reference temperature for the material as appropriate for the Johnson-Cook strength model. 
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YJC
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : KAPPA : DBLE
+DESC : Compaction rate parameter 
+<INFO>
+The parameter controls the compaction rate (the rate of change
+of distension with respect to volumetric strain) of pore
+closure in the compaction regime.  
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE: 0.1D0 : 1.D0
+COL: 1 : 1
+TEST : NO
+</CODE>
+SECTION : MATPORE
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LAYANG : DBLE
+DESC : Layer slope
+<INFO>
+Define the dipping angle (measured from horizontal) for the layer.
+</INFO>
+SECTION : TARGET
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : YES
+DEFVAL : 0.D0
+RANGE : 0.D0 : 90.D0
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LAYDAM : DBLE
+DESC : initial damage of layer
+<INFO>
+This parameter controls the initial damage
+of the layer.
+Currently only supported by iSALE-2D
+</INFO>
+SECTION : TARGET
+<CODE>
+DIM : 2
+RANGE : 0.D0 : 1.D0
+COL: 1:
+OPTIONAL : YES
+DEFVAL : 0.D0
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LAYDAMPROF : INT
+DESC : Damage profile for layer
+<INFO>
+This option specifies whether a damage profile for the current
+layer shall be defined.
+
+Available values are:
+\begin{itemize}
+\item 0       : constant damage profile
+\item 1       : linear damage profile
+\end{itemize}
+
+The gradient is defined in the way that the damage on top of
+the layer is the one given by LAYDAM (of the current layer),
+while the damage on the bottom is the one given by LAYDAM of
+the lower layer.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+COL : 1 :
+VALUES : 0 : 1
+</CODE>
+SECTION : TARGET
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LAYMAT : STR
+DESC : Name of target material
+<INFO>
+With this parameter the target material is defined. 
+The name given here should correspond to a column
+in the material input file.
+</INFO>
+SECTION : TARGET
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : NO
+TEST : LAYNUM
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LAYNUM : INT
+DESC : Number of layers
+<INFO>
+Number of layers in the target (current maximum = 10).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+</CODE>
+SECTION : TARGET
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LAYPOS : INT
+DESC : Position of layer
+<INFO>
+Vertical position of the top of the layer in cells, measured from the 
+base of mesh.  
+
+Required if LAYNUM /= 0.
+</INFO>
+SECTION : TARGET
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : NO
+RANGE : :
+TEST : LAYNUM
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LAYTPROF : STR
+DESC : layer thermal prof.
+<INFO>
+Define how the thermal profile (in each layer sepatately)
+is calculated.
+
+Available values are:
+\begin{itemize}
+\item CONST       : constant temperature profile
+\item COND        : conductive temperature profile
+\item CONDCONV    : conductive and convective temperature profile
+\item CONDCONVCAP : like CONDCONV, but cap temperatures above solidus
+\item USER        : user defined temperature profile
+\end{itemize}
+</INFO>
+SECTION : TARGET
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : YES
+DEFVAL : CONST
+VALUES :  CONST : COND : CONDCONV : CONDCONVCAP : USER
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LAYTYPE : INT
+DESC : Layer type
+<INFO>
+Defines the type, i.e. 'shape' of the layer.
+Avaliable values are
+\begin{itemize}
+\item 0 : standard layer (default)
+\item 10: landslide layer type
+\item 20: meso-scale layer type
+\end{itemize}
+</INFO>
+SECTION : TARGET
+<CODE>
+DIM : 1
+COL : 1 : 1
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 10 : 20
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : LDWEAK : STR
+DESC : Low dens. weakening
+<INFO>
+Sets the weakening model for low density materials. Available is:
+
+\begin{itemize}
+
+\item POLY Polynomial function of density.
+
+\item NONE No low-density weakening.
+
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+VALUES : POLY : NONE
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LP_ROHIGH : DBLE
+DESC : Upper pres. bound
+<INFO>
+When computing the initial lithostatic pressure gradient, the code marches
+down from the surface computing the pressure/density/etc. for each cell based
+on the cell above. In each case, the density of the cell may be lower
+or greater than the density of the cell above. A bi-sector splitting algorithm
+is used to converge on the density that gives the correct pressure. LP\_ROHIGH
+specifies the upper limit of the initial density range for the splitting search
+for each cell as a multiple of the density of the cell above. 
+
+If the lithostatic pressure iteration fails (the code stops with an
+appropriate error), this may be because the density range is too small (a
+density that gives the correct pressure is not found) or too large (there are
+two densities that give the correct pressure, but the wrong--lower--one is found).
+In such cases, the density range can be altered using LP\_ROLOW and LP\_ROHIGH.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D+1
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LP_ROLOW : DBLE
+DESC : Lower press. bound
+<INFO>
+When computing the initial lithostatic pressure gradient, the code marches
+down from the surface computing the pressure/density/etc. for each cell based
+on the cell above. In each case, the density of the cell may be lower
+or greater than the density of the cell above. A bi-sector splitting algorithm
+is used to converge on the density that gives the correct pressure. LP\_ROLOW
+specifies the lower limit of the initial density range for the splitting search
+for each cell as a fraction of the density of the cell above. 
+
+If the lithostatic pressure iteration fails (the code stops with an
+appropriate error), this may be because the density range is too small (a
+density that gives the correct pressure is not found) or too large (there are
+two densities that give the correct pressure, but the wrong--lower--one is found).
+In such cases, the density range can be altered using LP\_ROLOW and LP\_ROHIGH.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D-1
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : LP_TOLER : DBLE
+DESC : Pressure tolerance
+<INFO>
+Defines how accurately the initial lithostatic pressure is calculated.
+The iteration to calculate pressure as a function of depth/radius in the
+target/planet is forced to converge until the relative error in pressure
+is below LP\_TOLER.
+
+If the lithostatic pressure iteration fails (the code stops with an
+appropriate error), this tolerance can be relaxed.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D-9
+RRANGE : 1.D-12 : 1.D-3
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : MATNAME : STR
+DESC : Material name
+<INFO>
+This parameter defines the name of the material
+and should be no longer than 10 characters.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : MG_CHEAT : DBLE
+DESC : spec. heat capacity
+<INFO>
+Sets the specific heat capacity of
+the material, in J/(kg K). It is required when using
+the Mie-Gruneisen equation of state for a material to compute
+an approximate temperature.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_MIEGRUN
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : MG_CS0 : DBLE
+DESC : Bulk sound speed
+<INFO>
+Bulk sound speed (zero pressure) in m/s for the Mie-Gruneisen equation of state.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.D0 :
+</CODE>
+SECTION : MAT_MIEGRUN
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : MG_GAMMA : DBLE
+DESC : Reference Gruneisen parameter.
+<INFO>
+This is Gruneisen gamma (reference state) in the Mie-Gruneisen equation of state.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_MIEGRUN
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : MG_RHO0 : DBLE
+DESC : Reference density
+<INFO>
+Sets the reference density (in kg/m$^3$) for the Mie-Gruneisen equation of state.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_MIEGRUN
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : MG_S : DBLE
+DESC : Slope of shock-velocity particle-velocity relationship
+<INFO>
+Slope of shock-velocity particle-velocity relationship as used in the Mie-Gruneisen equation of state.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.D0 :
+</CODE>
+SECTION : MAT_MIEGRUN
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : MODEL : STR
+DESC : Modelname
+<INFO>
+Sets the name of the model. The output data file is written to
+<PATH>/<MODEL>/<MODEL>.dat. Long modelnames (>40 characters) have
+been known to cause problems. Try to name your model something that
+will make sense in twelve months' time. 
+
+Names such as 'MyBestModel\_new' are not recommended.
+The modelname given in the input file may be overridden with the
+runtime command line option --FILE<modelame> (or -F<modelname>).
+If no modelname is given in either the input file or at runtime 
+then the string default will be used.
+</INFO>
+<CODE>
+OPTIONAL : YES
+DEFVAL : default
+DIM : 1
+</CODE>
+SECTION : GENERAL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : NEWCELLH : INT
+DESC : New cells (hor)
+<INFO>
+If regridding, these parameters define the number
+of cells in the horizontal direction to to add or
+remove from the high-resolution zone.
+Extension cells will be taken from the original
+setup definition.
+</INFO>
+SECTION : REGRIDDING
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+RANGE : 0 : 
+COL : 1 : 2
+TEST : REGRIDONE
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : NEWCELLV : INT
+DESC : New cells (vert)
+<INFO>
+If regridding, these parameters define the number
+of cells in the vertical direction to to add or
+remove from the high-resolution zone.
+Extension cells will be taken from the original
+setup definition.
+</INFO>
+SECTION : REGRIDDING
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+RANGE : 0 : 
+COL : 1 : 2
+TEST : REGRIDONE
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJDAM : DBLE
+DESC : initial damage of object
+<INFO>
+This parameter controls the initial damage
+of the projectile.
+Currently only supported by iSALE-2D
+</INFO>
+SECTION : OBJECT
+<CODE>
+DIM : 2
+RANGE : 0.D0 : 1.D0
+COL: 1:
+OPTIONAL : YES
+DEFVAL : 0.D0
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJDAMPROF : INT
+DESC : Damage profile for object
+<INFO>
+This option specifies whether a damage profile for the current
+object (projectile) shall be defined.
+
+Available values are:
+\begin{itemize}
+\item 0       : constant damage profile
+\item 1       : linear damage profile
+\end{itemize}
+
+The gradient is defined in the way that the damage on top of
+the layer is the one given by OBJDAM (of the current object),
+while the damage on the bottom is the one given by OBJDAM of
+the 'lower' object.
+
+PLEASE NOTE THAT THIS PARAMETER IS ONLY INCLUDED FOR
+COMPATIBILITY REASONS.
+THE FEATURE OF HAVING A DAMAGE PROFILE IN OBJECTS IS
+STILL DISABLED...
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+COL : 1 :
+VALUES : 0 : 1
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJDENS : DBLE
+DESC : object density
+<INFO>
+It is possible to assign a density to an object that is not the reference
+density using OBJDENS.  This is useful when the object is a gas, for example.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJENER : DBLE
+DESC : object specific internal energy
+<INFO>
+Each object can be assigned an initial temperature or specific internal energy,
+using OBJTEMP (in Kelvin) or OBJENER (in Joules/kg). If neither inputs are 
+present for OBJTEMP or OBJENER, then the object temperature is set to the value
+of T\_SURF, and the initial energy is calculated so that the temperature is 
+equal to T\_SURF. If both OBJTEMP and OBJENER are set, then only OBJENER is used 
+(unless OBJENER = 0.0). OBJENER can be used simulate the instantaneous 
+deposition of a large amount of energy within the object.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJMAT : STR
+DESC : object material
+<INFO>
+Each object can be assigned a material here, using OBJMAT.
+The inputs must correspond to the material names
+in material.inp (i.e. a seven letter character string).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJNUM : INT
+DESC : Number of objects
+<INFO>
+Number of objects in the simulation (current maximum = 10).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE : 0 : 10
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJOFF_D : INT
+DESC : object offset (cells; third dimension)
+<INFO>
+By default, objects are placed so that their base is located at the mesh 
+co-ordinate (0.,0.,0.), which is on the surface of the target, or the 
+collision site (COL\_SITE), and (when using cylindrical or bilateral symmetry) 
+on the symmetry axis in the horizontal direction. This can be changed using 
+the input parameters OBJOFF\_H/V/D. A positive/negative OBJOFF\_D will offset the
+object that number of cells horizontally in the positive/negative Y direction.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJOFF_H : INT
+DESC : object offset (cells; horizontal)
+<INFO>
+By default, objects are placed so that their base is located at the mesh 
+co-ordinate (0.,0.,0.), which is on the surface of the target, or the 
+collision site (COL\_SITE), and (when using cylindrical or bilateral symmetry) 
+on the symmetry axis in the horizontal direction. This can be changed using 
+the input parameters OBJOFF\_H/V/D. A positive/negative OBJOFF\_H will offset the
+object that number of cells horizontally in the positive/negative X direction 
+(away from the symmetry axis in 2D). It is worth noting that in cylindrical 
+geometry, a spherical object with a horizontal offset will no longer be a 
+sphere (but rather a ring).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJOFF_V : INT
+DESC : object offset (cells; vertical)
+<INFO>
+By default, objects are placed so that their base is located at the mesh 
+co-ordinate (0.,0.,0.), which is on the surface of the target, or the 
+collision site (COL\_SITE), and (when using cylindrical or bilateral symmetry) 
+on the symmetry axis in the horizontal direction. This can be changed using 
+the input parameters OBJOFF\_H/V/D. OBJOFF\_V offsets the object in the vertical 
+direction by the given number of cells (positive is defined to offset the object
+up; negative values will offset the object down).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJPPROF : STR
+DESC : Obj. por. profile
+<INFO>
+Porosity profile in object(s).
+</INFO>
+SECTION : OBJECT
+<CODE>
+DIM : 1
+COL : 1 : 1
+OPTIONAL : YES
+DEFVAL : NONE
+VALUES : NONE : LINEAR
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJPRES : DBLE
+DESC : Obj. pressure
+<INFO>
+Defines the projectile pressure. If not set, P\_surf is used.
+</INFO>
+SECTION : OBJECT
+<CODE>
+DIM : 1
+COL : 1 : 1
+OPTIONAL : YES
+RANGE : 0.D0 : 
+RRANGE : 250.D0 : 300.D0
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJRESD : INT
+DESC : Resolution of object
+<INFO>
+Specifies half-depth of the object in cells, in the horizontal (Y)
+direction.  The exact meaning of OBJRESD varies depending on the OBJTYPE. See
+that parameter for more details.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+RRANGE : 5 :
+RANGE: 1 :
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJRESH : INT
+DESC : Resolution of object
+<INFO>
+Specifies half-width of the object in cells, in the horizontal (X)
+direction.  The exact meaning of OBJRESH varies depending on the OBJTYPE. See
+that parameter for more details.
+\begin{figure}
+\includegraphics[width=\textwidth]{figs/projectile_diameter_L.pdf}
+\label{fig:cppr}
+\end{figure}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RRANGE : 5 :
+RANGE: 1 :
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJRESV : INT
+DESC : Resolution of object
+<INFO>
+Specifies half-height of the object in cells, in the vertical
+direction.  The exact meaning of OBJRESV varies depending on the OBJTYPE. See
+that parameter for more details.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+RRANGE : 5 :
+RANGE: 1 :
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJTEMP : DBLE
+DESC : object temperature
+<INFO>
+Each object can be assigned an initial temperature or specific internal energy,
+using OBJTEMP (in Kelvin) or OBJENER (in Joules/kg). If neither inputs are 
+present for OBJTEMP or OBJENER, then the object temperature is set to the value
+of T\_SURF, and the initial energy is calculated so that the temperature is 
+equal to T\_SURF. If both OBJTEMP and OBJENER are set, then only OBJENER is used 
+(unless OBJENER = 0.0).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJTPROF : STR
+DESC : Object thermal profile
+<INFO>
+For use with S\_TYPE = PLANET, use this option to set a temperature profile
+through the planet. OBJTPROF = CONST sets up a constant temperature in the
+planet. Use OBJTPROF = COND for a conductive profile and OBJTPROF = CONDCONV
+for a convective profile in the planet.
+OBJTPROF = CONDCONVCAP uses a convective profile, too, but additionally
+caps temperatures by the melt temperature.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+VALUES : CONST : COND : CONDCONV : CONDCONVCAP
+DEFVAL : CONST
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJTYPE : STR
+DESC : object type (shape)
+<INFO>
+There are several types of object that can be used:
+
+\begin{description}
+\item[OBJTYPE = SPHEROID] (the default value) - a spherical projectile,
+in which the size of the projectile is determined by OBJRESH, which
+is the number of cells per projectile radius in the horizontal direction.
+If OBJRESV is also defined and differs from OBJRESH, a spheroid (ellipsoid)
+is created, which has equatorial radii equal to OBJRESH, and a polar radius
+(in the y-direction) of OBJRESV. For ellipsoidal objects, if OBJRESH is greater
+than OBJRESV, the resulting object will be an oblate spheroid, and if OBJRESH
+is smaller than OBJRESV, the resulting object will be a prolate spheroid.
+\item[OBJTYPE = CUBOID] - a cuboid with a height of two times OBJRESV cells, a width
+of two times OBJRESH and a depth of two times OBJRESD cells is created. If
+OBJRESV = OBJRESH = OBJRESD, the resulting object will be a cube.
+
+\item[OBJTYPE = CYLINDER] - a cylinder, which has a height of two times OBJRESV cells
+and a width of OBJRESH cells. If no OBJRESV is specified, the cylinder has a
+height of two times OBJRESH.
+
+\item[OBJTYPE = PLATE] - a plate, which which has a height of two times OBJRESH cells
+and is the width of the mesh (for this projectile type it is recommended to not
+use an extension zone in the mesh). The object type is used for 1D planar impacts.
+\end{description}
+
+NB - OBJRESV and OBJRESD are only required for ellipsoidal objects. If it is not set,
+then by default it will take the value of OBJRESH (i.e. a sphere).
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : SPHEROID
+VALUES : SPHEROID : CUBOID : BITMAP : PLATE : CYLINDER
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : OBJVEL : DBLE
+DESC : object velocity
+<INFO>
+To set the velocity of an object, use OBJVEL.
+This should be defined separately for each object, in $m/s$.
+A negative value for velocity is defined as vertically down,
+and a positive value is defined as vertically up.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE : :
+RRANGE : -72.D3 : 72.D3
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ODUMP : INT
+DESC : over-write dump file flag
+<INFO>
+This flag specifies whether the dump-file should be over-written (1) or not (0). 
+Over-writing dump files saves disk space, particularly if the dump time is short.
+If over-writing, the dump file is named restart.dump.
+To create a dump file when the -C flag is used, ODUMP must be equal to 1.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+</CODE>
+SECTION : TIME
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PANGLE2 : DBLE
+DESC : Part. vel. angle2
+<INFO>
+Define the particle velocity angle (iSALE-3D only; iSALE-2D: always vertical).
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 3
+COL : 1 :  
+OPTIONAL : YES
+DEFVAL : 0.D0
+RANGE : 0.D0 : 360.D0
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PANGLE : DBLE
+DESC : Part. vel. angle
+<INFO>
+Define the particle velocity angle (iSALE-3D only; iSALE-2D: always vertical).
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 3
+COL : 1 :  
+OPTIONAL : YES
+DEFVAL : 90.D0
+RANGE : 0.D0 : 360.D0
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARDENS : DBLE
+DESC : Part. density
+<INFO>
+Set the density of the particles.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+DEFVAL : 0.D0
+RANGE : 0.D0 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARDIST : STR
+DESC : Part. distr. type
+<INFO>
+Define the algorithm to distribute particles.
+\begin{itemize}
+\item REGULAR : standard setup
+\item RANDOM  : random distribution
+\end{itemize}
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+DEFVAL : REGULAR
+VALUES : REGULAR : RANDOM
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARENER : DBLE
+DESC : Part. energy
+<INFO>
+Set the energy of the particles.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+DEFVAL : 0.D0
+RANGE : 0.D0 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARFRAC : DBLE
+DESC : Part. density
+<INFO>
+Define the particle number density.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : NO
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARHOBJ : INT
+DESC : Host object
+<INFO>
+Define the host object for particles.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : NO
+RANGE : 1 : 
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARMARH : DBLE
+DESC : Width of margin along mesh edges
+<INFO>
+Define the width of the margin along the sides of the domain in which the 
+particle center may be placed in units of average particle diameter. Positive values
+imply the margin is outside the actual mesh, which allow for partial particles to be
+placed along the boundary. Negative values imply the margin is inside the actual mesh,
+which allow a forbidden zone to be included along the edges of the mesh. Zero value
+(default) implies that particles can be placed right up to the mesh edge, but not beyond.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+DEFVAL : 0.D0
+RANGE : 0.D0 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARMAT : STR
+DESC : Pore mat. name
+<INFO>
+Define the material for pore filling.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : YES
+TEST : PARNUM
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARNUM : INT
+DESC : Number of particles
+<INFO>
+For meso-scale particle simulations, this parameter
+defines the number of particle classes.
+</INFO>
+SECTION : OBJECT
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+RANGE : 0 : 
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARPRES : DBLE
+DESC : Part. pressure
+<INFO>
+Set the pressure of the particles. Default: Surface pressure (P\_surf).
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+RANGE : 0.D0 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRANGE : DBLE
+DESC : Part. size range
+<INFO>
+Define the particle size range
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+DEFVAL : 0.D0
+RANGE : 0.D0 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRAY_B : INT
+DESC : Horizontal boundary of probes in probe-array
+<INFO>
+Specifies the right hand boundary in the x-direction for the tracers in a probe array, 
+for which detailed diagnostics will be output to a text file. The default is to stop 
+placing probes at the end of high resolution zone.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1
+RRANGE : :
+RANGE : :
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRAY_N : INT
+DESC : Number of probe arrays
+<INFO>
+A small number (<10) of arrays of tracers (along a constant j-coordinate) can be designated as probe arrays. 
+For each probe, a record of the state of the tracer is output every timestep.  
+This can be useful for debugging or for very high spatial temporal resolution analysis. 
+For example, to insert a numerical wave gauge.
+This option specifies the number of probe arrays. The default is that no probes will be created.
+The maximum number of probe arrays is 10. Output from the probes is written in a series of text 
+files \verb+tracerparray-#-<field>.txt+, or \verb+cellparray-#-<field>.txt+, in the directory
+\verb+PROBES/+
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+RRANGE : 0 : 10
+RANGE : 0 : 10
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRAY_O : INT
+DESC : Horizontal offset of probes in probe-array
+<INFO>
+Specifies the offset in cells in the x-direction for the tracers in a 
+probe array, for which detailed diagnostics will be output to a text file. 
+The default is for the first probe to be placed in cell $i=1$, which is 
+equivalent to setting \verb+PARRAY_O+ to 0.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+RRANGE : 0 : 
+RANGE : 0 :
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRAY_S : INT
+DESC : Horizontal spacing of probes in probe-array
+<INFO>
+Specifies the spacing in the x-direction for the tracers in a probe array, for 
+which detailed diagnostics will be output to a text file.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1
+RRANGE : 1 :
+RANGE : 1 :
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRAY_T : STRING
+DESC : Type of probe to use in probe arrays
+<INFO>
+Specifies whether the probes in a probe array are to be Eulerian (fixed in space)
+or Lagrangian (moving with material). In the Eulerian case, information from the
+selected cell will be recorded. In the Lagrangian case, information from the tracer 
+initially located in the selected cell will be recorded.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : LAGRANGE
+VALUES : LAGRANGE : EULER
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRAY_V : INT
+DESC : Location of cells of probes in a probe array (vertical)
+<INFO>
+Specifies the j-location of the tracers for which detailed diagnostics will be output to a text file. 
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1
+RRANGE : 1 :
+RANGE : 1 :
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRESD : INT
+DESC : Depth pore rad.
+<INFO>
+Define the depth resolution (radius of cells) of the pore (only iSALE-3D).
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 3
+COL : 1 : 
+OPTIONAL : YES
+RANGE : 1 : 
+RRANGE : 3 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRESH : INT
+DESC : Hor. pore rad.
+<INFO>
+Define the horizontal resolution (radius of cells) of the pore.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : NO
+RANGE : 1 : 
+RRANGE : 3 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARRESV : INT
+DESC : Vert. pore rad.
+<INFO>
+Define the vertical resolution (radius of cells) of the pore.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : YES
+RANGE : 1 : 
+RRANGE : 3 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARTEMP : DBLE
+DESC : Part. temp.
+<INFO>
+Set the temperature of the particles. Default: Surface temperature (T\_surf).
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+RANGE : 0.D0 :
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARTPRES : INT
+DESC : Pressure in part. full cells
+<INFO>
+This option specifies whether or not the pressure of material in
+partially full cells (that is, cells containing some fraction of
+void/vacuum) should be computed. By default, pressure is set to
+zero in partially full cells (PARTPRESS=0); this setting is
+recommended as it gives the best results for the vast majority of
+cases. Set PARTPRESS = 1 to compute pressure in partially full
+cells; this setting is recommended in some circumstances, such as
+impacts into high-strength ductile materials like metals.
+PARTPRESS=1 should be regarded as experimental and its effect
+tested when used.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 1
+</CODE>
+SECTION : CONTROL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARTYPE : STR
+DESC : Particle shape
+<INFO>
+Defines the shape of the particle. Required only for setup type MESO\_PART.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+DEFVAL : SPHEROID
+VALUES : SPHEROID : CUBOID : BITMAP : PLATE : CYLINDER
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PARVEL : DBLE
+DESC : Particle velocity
+<INFO>
+Define the particle velocity. Default: Same as host object.
+</INFO>
+SECTION : MESOPART
+<CODE>
+DIM : 1
+COL : 1 :  
+OPTIONAL : YES
+RANGE : :
+RRANGE : -30.D3 : 30.D3
+TEST : MESOPART
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PATH : STR
+DESC : Pathname
+<INFO>
+Sets the directory where the model output will be written.
+The pathname must end in a '/' character.
+Relative pathnames (./ is the current directory,
+../ is the directory above etc.) are accepted.
+Some problems have been reported for long (>40 characters)
+pathnames; the use of relative paths can help to keep
+pathnames short. The pathname given in the input file may
+be overridden with the runtime command line option --PATH<path>
+(or -P<path>). 
+Data files are large and written to frequently. To avoid writing
+large amounts of data across a network, PATH should point at a disk
+mounted locally rather than to network storage (e.g. write to 
+/data/ rather than /home/).
+</INFO>
+<CODE>
+OPTIONAL : NO
+DIM : 1
+</CODE>
+SECTION : GENERAL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : P_DEPTH: INT
+DESC : pore width
+<INFO>
+The number of cells in the pore in the other horizontal
+direction (depth, only in 3D). If a setup of individual
+pores is chosen (S\_PORES =4), the depth of pores has to
+be defined for each individual pores in seperate columns.
+</INFO>
+SECTION : MESOPORE
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 8 
+RANGE : 1 :
+RRANGE: 1 : 1000
+COL : 1 :
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : P_HEIGHT : INT
+DESC : pore height
+<INFO>
+The number of cells in the pore in vertical direction.
+If a setup of individual pores is chosen (S\_PORES =4), 
+the height of pores has to be defined for each individual
+pores in seperate columns.
+</INFO>
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL: 8 
+RANGE: 1:
+RRANGE: 1:1000
+COL: 1:
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PHI : DBLE
+DESC : phi
+<INFO>
+The square of the ratio of compressional to shear wave velocities. It is incorporated into the acoustic fluidization strength equation following Collins et al. (2003). 
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D1
+RANGE : 1.D0 : 3.D1
+RRANGE : 1.D0 : 1.5D1
+</CODE>
+SECTION : MAT_ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : P_LC_X : INT
+DESC : start location of pore in x direction
+<INFO>
+Defines the coordinate in the mesh in horizontal
+direction where the individual pore starts (left corner).
+Needs to be set for each individual pore seperatly.
+Only needed for setup type S\_PORES=4
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+RANGE  : 1 : 
+RRANGE: 1: 10000
+COL : 1 : 
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : P_LC_Y : INT
+DESC : start location of pore in y direction
+<INFO>
+Defines the coordinate in the mesh in vertical direction
+where the individual pore starts (left corner).
+Needs to be set for each individual pore seperatly.
+Only needed for setup type S\_PORES=4
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+RANGE  : 1 : 
+RRANGE: 1: 10000
+COL : 1 : 
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : P_LC_Z : INT
+DESC : start location of pore in z direction
+<INFO>
+Defines the coordinate in the mesh in the other horizontal
+direction (depth) where the individual pore starts (left corner).
+Needs to be set for each individual pore seperatly.
+Only needed for setup type S\_PORES=4
+SECTION : MESOPORE
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 1
+RANGE  : 1 : 
+RRANGE: 1: 10000
+COL : 1 : 
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PMININ : DBLE
+DESC : Minimum pressure
+<INFO>
+This parameter defines the smallest pressure permissible by the strength model. 
+It is required if the strength model has no pressure dependence (e.g., VNMS and JNCK). 
+It should be set to a negative value.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+RANGE : -1.D10 : 0.D0 
+TEST : NO
+</CODE>
+SECTION : MAT_GENERAL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : POIS : DBLE
+DESC : Poisson ratio
+<INFO>
+For elastic (and elastic-plastic) solids, iSALE requires the poisson ratio as an input parameter POIS
+and assumes it to be independent of temperature and pressure. This parameter is required for all strength
+models apart from LIQU and HYDRO, which assume that POIS = 0.5.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+RRANGE : 0.1D0 : 0.5D0
+</CODE>
+SECTION : MAT_GENERAL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PORE_max : INT
+DESC : maximum pore size
+<INFO>
+In case of randomly distributed pores (S\_PORES=3) where pore sizes can differ,
+a maximum pore size (width and height) that can be reached by the automatic
+generation of pores needs to be defined.
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 20
+RANGE  : 1 : 1000
+COL : 1 : 1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PORE_N : INT
+DESC : number of individual pores
+<INFO>
+This parameter defines the number of individual pores if the
+setup type of individual pores is chosen (S\_PORES=4).
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+RANGE  : 1 :  
+RRANGE: 1: 30
+COL : 1 : 1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PORE_T : INT
+DESC : pore type
+<INFO>
+This parameter controls the geometry of the pores. 
+If S_PORES=4 for indivudal pores, the pore type needs
+to be set for each individual pores in seperate columns.
+The available geometries are 
+\begin{itemize}
+\item 1 : squares (2D) resp. cubes (3D)
+\item 2 : circles (2D) resp. spheres (3D)
+\item 3 : rhombus (only for iSALE-2D.
+\end{itemize}
+SECTION : MESOPORE
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1
+VALUES : 1 : 2 : 3 
+COL : 1 : 
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 1
+VALUES : 1 : 2
+COL : 1 : 
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PORE_XD : INT
+DESC : pore distance (X)
+<INFO>
+Distance between pores in horizontal direction.
+</INFO>
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL: 10
+RANGE: 1:
+RRANGE: 1:1000
+COL: 1:1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PORE_YD : INT
+DESC : pore distance (Y)
+<INFO>
+Distance between pores in vertical direction.
+</INFO>
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL: 10 
+RANGE: 1:
+RRANGE: 1:1000
+COL: 1:1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PORE_ZD : INT
+DESC : pore distance (Z)
+<INFO>
+Distance between pores in the other horizontal direction (depth), only for 3D.
+</INFO>
+SECTION : MESOPORE
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL: 10
+RANGE: 1:
+RRANGE: 1:1000
+COL: 1:1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : POROSITY : DBLE
+DESC : porosity in sample
+<INFO>
+In case of randomly distributed pores (S\_PORES=2,3),
+the initial porosity has to be set by this parameter.
+It controls the number of pores that are located into the sample area.
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 20.D0
+RANGE  : 1.D-3 : 100.D0
+RRANGE : 1.D0 : 80.D0
+COL : 1 : 1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : POR_TENS : INT
+DESC : Porosity in tension model
+<INFO>
+This option selects the type of porosity model in tension.
+The default is to insert no porosity in tension and instead simply
+cap the pressure in tension according to the minimum pressure permitted
+by the strength model at the current state of damage. 
+Setting POR\_TENS to 1 will insert distension into materials in tension;
+the amount of distension is that required to relieve the tension in
+the solid material. POR\_TENS = 2 applies the same model, but caps
+the distension at a maximum distension value defined by the material
+input parameter.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 1 : 2
+</CODE>
+SECTION : CONTROL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PREPRAM1 : DBLE
+DESC : const. pre.
+<INFO>
+This parameter is only required, if boundary condition 'PRESQUASH' is set. 
+This value sets the constant pressure applied to the sides and the initial pressure applied to the
+top boundary.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : NO
+RANGE : :
+TEST : BNDPRESQUASH
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PREPRAM2 : DBLE
+DESC : increasing pre.
+<INFO>
+This parameter is only required, if boundary condition 'PRESQUASH' is used.
+It defines the linear rate at which pressure along the top boundary is increased
+as a function of time. 
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : NO
+RANGE : :
+TEST : BNDPRESQUASH
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PRIORITY : INT
+DESC : Material priority model for advection
+<INFO>
+This option selects between several methods used to construct interfaces between 
+different materials in a mixed cell.  See the advection section for more details. 
+When more than two materials (including vacuum) exist in a cell, more than one 
+interface must be constructed to separate the material in the cells so that fluxes 
+into and out of the mixed cell can be divided based on sensible and accurate volume 
+fractions. No universally satisfactory method has been implemented for achieving this.  
+
+At present, several alternative approaches are available that differ based on the 
+order in which the material interfaces are constructed; more important materials have 
+their interface constructed first and more accurately, less important materials have 
+their interface modified to achieve consistency. The most successful approach has 
+been to prioritise material based on volume fraction---the material occupying the 
+largest volume is the highest priority---this method is the default and is selected 
+by setting PRIORITY=1.  Another approach that can be successful is not to set any 
+priority at all; choose this by setting PRIORITY=0.  If you wish to deactivate 
+interface construction between materials, set PRIORITY=-1. In this case, numerical 
+diffusion will artificially mix materials, but this may be preferable for studying 
+the fate of small quantities of materials (e.g., tracers of impactor). It is not 
+possible to deactivate interface construction for the material-void interface or 
+to deactivate interface construction for only one material. All other options are 
+experimental and documented in the advection section.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1
+RANGE : -1 : 7
+</CODE>
+SECTION : CONTROL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PROBE_H : INT
+DESC : Location of cell to probe
+<INFO>
+Specifies the i-location of the cell/tracer for which detailed diagnostics will be output to a text file. 
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1
+RRANGE : :
+RANGE : :
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PROBE_N : INT
+DESC : Number of probes
+<INFO>
+A small number (<26) of cells or tracers (not a mixture) can be designated as probes. 
+For each probe, a record of the state of the cell/tracer is output every timestep.  
+This can be useful for debugging or for very high spatial temporal resolution analysis. 
+For example, to insert a numerical wave gauge.
+This option specifies the number of probes. The default is that no probes will be created.
+The maximum number of probes is 26. Output from the probes is written in a series of text 
+files \verb+<cell/tracer>probe-#.txt+.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+RRANGE : 0 : 26
+RANGE : 0 : 26
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PROBE_T : STRING
+DESC : Type of probe
+<INFO>
+Specifies whether the probes are to be Eulerian (fixed in space) or Lagrangian (moving with material). 
+In the Eulerian case, information from the selected cell will be recorded. 
+In the Lagrangian case, information from the tracer initially located in the selected cell will be recorded.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : EULER
+VALUES : EULER : LAGRANGE
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PROBE_V : INT
+DESC : Location of cell to probe (vertical)
+<INFO>
+Specifies the j-location of the cell/tracer for which detailed diagnostics will be output to a text file. 
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 1
+RRANGE : :
+RANGE : :
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : PROJNUM : INT
+DESC : Number of proj.
+<INFO>
+Number of objects in the projectile (for use in gravity setup).
+</INFO>
+SECTION : OBJECT
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+RANGE : 0 : 
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : PR_TRACE : INT
+DESC : Object tracer switch
+<INFO>
+1 = Tracers are coloured (grouped) according to object number
+0 = Tracers are coloured (grouped) according to material number
+This switch allows tracers in multiple objects of the same material to be 
+grouped together (default); or not.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+RANGE : 0 : 1
+</CODE>
+SECTION : OBJECT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV :  P_SURF : DBLE
+DESC : Surface pressure (Pa)
+<INFO>
+Surface pressure in Pascals applied when calculating the initial lithostatic
+gradient. Default is 0 Pa. 
+</INFO>
+SECTION : GRADIENT
+<CODE>
+DIM : 1
+RANGE : 0.D0 :
+OPTIONAL : YES
+DEFVAL : 0.0D0
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : P_WIDTH : INT
+DESC : pore width
+<INFO>
+The number of cells in the pore in horizontal direction.
+If a setup of individual pores is chosen (S\_PORES =4),
+the width of pores has to be defined for each individual
+pores in seperate columns.
+</INFO>
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL: 8 
+RANGE: 1:
+RRANGE: 1:1000
+COL: 1:
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : QDISS : DBLE
+DESC : Acoustic energy dissipation factor
+<INFO>
+The quality dissipation factor, formally defined as the ratio of energy stored per cycle to that dissipated in the same period (Collins et al., 2003). 
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D2
+RANGE : 0.D0 : 
+RRANGE : 1.D1 : 1.0D5
+</CODE>
+SECTION : MAT_ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : QUALITY : INT
+DESC : compression depth
+<INFO>
+Use this parameter to control the compression technique and density (quality)
+for fields whose density is not set explicitely.
+
+Please do not change this value unless you know what you do.
+Changing compression algorithm or density might result in compression
+artifacts and, thus, affect the simulation results and post-processing quality.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+COL : 1 : 1
+DEFVAL : -50
+RANGE : -100 : 100
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : RANGED : INT
+DESC : depth writing range
+<INFO>
+Defines the depth (3rd dimension) extent of the calculation area/volume which
+shall be stored in the datafile. These parameters are only required
+if manual setup (RANGE>2) is selected.
+This parameter is only required for three-dimensional meshes.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : NO
+COL : 1 : 2
+TEST : RANGE
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : RANGEH : INT
+DESC : hor. writing range
+<INFO>
+Defines the horizontal extent of the calculation area/volume which
+shall be stored in the datafile. These parameters are only required
+if manual setup (RANGE>2) is selected.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : NO
+COL : 1 : 2
+TEST : RANGE
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : RANGE : INT
+DESC : writing range mode
+<INFO>
+Defines what part of the calculation grid should be stored in the datafile.
+
+Available types are:
+\begin{itemize}
+\item 0 : Store high-resolution zone only (skip extended zone).
+\item 1 : Store entire mesh (default)
+\item 2 : Define area/volume manually (requires additional input-parameters).
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+COL : 1 : 1
+DEFVAL : 1
+VALUES : 0 : 1 : 2
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : RANGEV : INT
+DESC : vert. writing range
+<INFO>
+Defines the vertical extent of the calculation area/volume which
+shall be stored in the datafile. These parameters are only required
+if manual setup (RANGE>2) is selected.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : NO
+COL : 1 : 2
+TEST : RANGE
+</CODE>
+SECTION : OUTPUT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : REGRID : INT
+DESC : Regridding
+<INFO>
+This parameter turns regridding on (1) or off (2).
+</INFO>
+SECTION : REGRIDDING
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 1
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : RGRD_BUFF : INT
+DESC : Position of regrid buffer
+<INFO>
+Vertical position of the buffer that checks for density increases.
+Measured in cells from the base of mesh.
+
+Required if RGRD\_DYNM = 1
+</INFO>
+SECTION : REGRIDDING
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : YES
+RANGE : :
+TEST : RGRD_DYNM
+DEFVAL : 20
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : RGRD_DYNM : INT
+DESC : Dynamic Regridding
+<INFO>
+This parameter turns regridding on (1) or off (2).
+</INFO>
+SECTION : REGRIDDING
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : RGRD_POS : INT
+DESC : Position of impactor after regridding
+<INFO>
+Vertical position of the bottom of the impactor after regridding
+Measured in cells from the top of mesh (negative for down).
+
+</INFO>
+SECTION : REGRIDDING
+<CODE>
+DIM : 1
+COL : 1 : 
+OPTIONAL : YES
+RANGE : :
+DEFVAL : -55555
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : RGRD_TRIG : DBLE
+DESC : dynamic regridding trigger threshold
+<INFO>
+Sets the triggering density ratio between the buffer and a short distance
+below the buffer. The short distance is calculated as 1/4 of the vertical
+length from the bottom of the mesh to the buffer.
+</INFO>
+SECTION : REGRIDDING
+<CODE>
+DIM : 1
+OPTIONAL : YES
+RANGE : 1.D-9 :
+RRANGE: 1.D-6 : 1.D6
+COL: 1:
+DEFVAL : 1.1D0
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : ROCUTOFF : DBLE
+DESC : Density cutoff
+<INFO>
+Stability parameter. If the material density in a cell is below
+this theshold (measured in $kg/m^3$) the material is deleted to increase
+calculation speed.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 5.D0
+RANGE : 0.D0 :
+</CODE>
+SECTION : STABILITY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : R_PLANET : DBLE
+DESC : Planet radius (for thermal profile)
+<INFO>
+This parameter sets the radius of the planet (in metres), which is required to 
+compute a physically reasonable geothermal temperature profile (see LAYTPROF).  
+The default is 6.37E6 m (the radius of Earth).
+</INFO>
+SECTION : GRADIENT
+<CODE>
+DIM : 1
+RANGE : 0.D0 :
+RRANGE : 0.D0 : 20000.D3
+OPTIONAL : YES
+DEFVAL : 6370.D3
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : SAMPLE_T : INT
+DESC : sample area bottom
+<INFO>
+This parameter defines the bottom of a defined sample area which is filled up with pores within the mesh. It is needed for the cases of S_PORES=1,2,3. The default values are set in a way that there is always space between the sample with pores and the bottom of the grid.
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+RANGE  : 1 : 
+RRANGE : 1 : 10000
+COL : 1 : 1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SAMPLE_T : INT
+DESC : sample area top
+<INFO>
+This parameter defines the top of a defined sample area
+which is filled up with pores within the mesh.
+It is required for the cases of S\_PORES=1,2,3.
+The default values are set in way that there is
+always space between the sample with pores and
+the projectile/target interface.
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+RANGE  : 1 : 
+RRANGE : 1 : 10000
+COL : 1 : 1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SCATTER : DBLE
+DESC : Acoustic energy scattering diffusivity
+<INFO>
+The scattering diffusivity. Determines the magnitude of the scattering (diffusion) term in the acoustic fluidization ODE. 
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D3
+RANGE : 0.D0 : 
+RRANGE : 0.D0 : 1.0D8
+</CODE>
+SECTION : MAT_ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SG_BARHUT : DBLE
+DESC : Self-gravity accuracy parameter
+<INFO>
+The self-gravity algorithm in iSALE2D (not iSALE3D) uses a Barnes-Hut type
+algorithm to reduce the computational cost of updating the gravity field.
+This parameter specifies the Barnes-Hut opening angle, which defines the 
+acceptable ratio of mass length-scale to separation distance. Cells beyond
+this relative distance can be combined into mass blocks, with a common centre
+of mass. By default this parameter is set to 0., which means that no mass
+lumping is employed. This is liable to imply very long run times.
+</INFO>
+SECTION : GRADIENT
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0.D0
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SG_MASSLUMP : INT
+DESC : Self-gravity masslumping switch
+<INFO>
+This specifies whether to lump the mass on the finest mass mesh in the self-gravity calculation.
+Only used when SG\_BARHUT > 0. By default the mass is not lumped, implying that the finest mesh in the 
+self-gravity calculation is the actual mesh.  Turning on this parameter can lead to additional time
+savings because the gravity calculation uses the level 2 mesh as the finest mesh.
+</INFO>
+<CODE>
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 1
+DIM : 2
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SG_NCYC : INT
+DESC : Self-gravity update frequency
+<INFO>
+This specifies the number of cycles between local gravity updates (i.e., 
+update gravity at all nodes with mass). A global gravity update (update 
+gravity at all nodes, including empty ones) is done every 10*SG\_NCYC.
+Increasing SG\_NCYC will speed up the calculation time at the expense of
+a less accurate gravity field.
+</INFO>
+<CODE>
+OPTIONAL : YES
+DEFVAL : 5
+DIM : 2
+</CODE>
+SECTION : GRADIENT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SLOPE_ANG : DBLE
+DESC : slope angle
+<INFO>
+The parameter SLOPE\_ANG defines the angle of the slope. That is the
+angle (clockwise) between the reference layer and the slope and is
+measured in degree (e.g. 45.D0). Extreme values for the slope angle,
+i.e. < 15° or > 75°, are recommended for experienced users only.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : NO
+RANGE : 0.D0 : 90.D0
+RRANGE : 15.D0 : 75.D0
+TEST : SLOPE
+</CODE>
+SECTION : SLOPE
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SLOPE_H : INT
+DESC : slope height
+<INFO>
+The parameter SLOPE\_H defines the height of the slope.
+</INFO>
+SECTION : SLOPE
+<CODE>
+DIM : 3
+OPTIONAL : NO
+TEST : SLOPE
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SLOPE_LAY : INT
+DESC : reference layer for slope
+<INFO>
+The parameter SLOPE\_LAY defines which layer is used as reference layer.
+The default value is 1. The slope starts on top of the reference layer.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 1
+TEST : SLOPE
+</CODE>
+SECTION : SLOPE
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SLOPE_OFF : INT
+DESC : horizontal offset of slope
+<INFO>
+The slope can be shifted horizontally to create a plateau of 
+<SLOPE\_OFF> cells. This parameter is optional. The default value
+is 0, i. e. the slope starts directly on the left side.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 0
+TEST : SLOPE
+</CODE>
+SECTION : SLOPE
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : S_PORES : INT
+DESC : setup pores
+<INFO>
+This parameter controls the distribution and arrangement
+of pores in the mesh which are either regulary distributed
+pores (S\_PORES=1), randomly distributed pores (S\_PORES=2)
+in which case the sizes of the pores are fixed, random pores
+(S\_PORES=3) where the sizes of pores may differ and pores
+may overlap or individual pores (S\_PORES=4) where the user
+defines the number of pores, usually a smaller number of pores
+(about 1 to 12) is chosen.
+SECTION : MESOPORE
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+VALUES : 1 : 2 : 3 : 4
+COL : 1 : 1
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SQUASHA : DBLE
+DESC : squash acceleration
+<INFO>
+This parameter is only required if boundary condition 'TOPSQUASH' is used
+and is only available for the top boundary. If set, it defines the constant
+downward acceleration of the top boundary. Set to zero for constant velocity
+deformation.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0.
+RANGE : :
+TEST : BNDTOPSQUASH
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SQUASHV : DBLE
+DESC : squash velocity
+<INFO>
+This parameter is only required, if boundary condition 'TOPSQUASH' is used
+and is only available for the top boundary.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : NO
+RANGE : :
+TEST : BNDTOPSQUASH
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : STRESS : INT
+DESC : Include deviatoric stress model
+<INFO>
+This option switches the stress model on (1) or off (0, default).
+
+See the material model chapter for more details.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 1
+</CODE>
+SECTION : CONTROL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : STRMOD : STR
+DESC : Strength model
+<INFO>
+
+Sets the strength model used (see the relevant section below for more details):
+\begin{description}
+\item[ROCK]  - Pressure- and damage-dependent strength model for rock-like materials.
+\item[DRPR]  - Drucker-Prager: Linear pressure-dependent strength model for granular materials.
+\item[LUNDI] - Lundborg intact: Non-linear pressure-dependent strength model for intact rock.
+\item[LUNDD] - Lundborg damaged: Non-linear pressure-dependent strength model for damaged rock.
+\item[VNMS]  - Von Mises: Constant yield-strength model for ductile materials.
+\item[JNCK]  - Johnson and Cook: Strain and strain-rate dependent strength model for metals.
+\item[LIQU]  - Liquid: Newtonian fluid model
+\item[HYDRO] - Hydrodynamic: Inviscid fluid model
+\end{description}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+VALUES : ROCK : DRPR : LUNDI : LUNDD : VNMS : JNCK : LIQU : HYDRO
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : S_TYPE : STRING
+DESC : Setup type
+<INFO>
+Several different setup types are available, accessed using the S\_TYPE 
+parameter...
+
+\begin{itemize}
+
+\item DEFAULT ---- a standard impact of one or more objects (projectiles) 
+               into other objects or a half space target. In this setup
+               a spatially constant gravity field can be specified as
+               well as the self-gravitational field can be computed
+               (see GRAD\_TYPE).
+               Suggested setups in this mode are:
+\begin{itemize}
+  \item For a collision between two objects, with no target layers, set the 
+    parameter LAYNUM = 0. Define a site for the collision (in number of 
+    cells from the bottom of the mesh; COL\_SITE. By default, both objects 
+    would be placed with their base at the collision site, so we need to 
+    set OBJOFF\_V to -2 times the radius of the projectile for the object 
+    that we want to be below the collision site. 
+  \item For a layered projectile, two or more objects can be used, with a 
+    different OBJMAT or OBJTEMP, for example. In this case, the OBJOFF\_V
+    should be set so that the centre of the objects are aligned. For example, 
+    if the layered object is to be placed above the COL\_SITE, the larger 
+    object OBJOFF\_V should be set to 0, and for the smaller object (e.g. 
+    the core), the vertical offset should be a positive number equal to the 
+    difference between the radius of the two objects. See the Collision2D
+    example for more details.
+\end{itemize}
+\item PLANET ----- an impact of a projectile into a planet with central/self 
+    gravity. For this setup type, GRAV\_H/V/D must be set to 0. In this setup, 
+    the planet is automatically located below COL\_SITE, with the projectile 
+    above the collision site. See the Planet2D example for more details.
+\item LANDSLIDE -- Setup for modelling landslide waves. See the landslide example.
+\item MESO\_PORES - Setup for meso-scale modelling of porous materials. (Under 
+               development).
+\item MESO\_PART -- Setup for meso-scale modelling of particles (under development).
+\item MESO\_BITMAP -- Setup for meso-scale modelling of a bitmap image
+\item DEFORM -- Setup for prescribed deformation/stress analysis (useful for strength-model development).
+
+\end{itemize}
+</INFO>
+SECTION : SETUP
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : DEFAULT
+VALUES : DEFAULT : PLANET : LANDSLIDE : MESO_PORE : MESO_PART : MESO_BMP : DEFORM : ROTATE : SHEARFLOW
+</CODE>
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : SYMMETRY : INT
+DESC : Symmetry
+<INFO>
+This parameter controls whether iSALE should be run in a halfspace (SYMMETRY=1),
+in a quarter-space (SYMMETRY=2) or even in an oct-space (SYMMETRY=4)
+</INFO>
+SECTION : CONTROL
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 2
+VALUES : 1 : 2 : 4
+COL : 1 : 1
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : TDUMP : DBLE
+DESC : save interval
+<INFO>
+Defines the period between dumping--saving data to enable the calculation to be restart.
+For positive values, this is the model time between restarting file output, in seconds. 
+For negative values, this is the wall time between restarting file output, in hours.
+The default value is 0., which means a restart dump is made every 24 hours in wall time.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0.
+</CODE>
+SECTION : TIME
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TEND : DBLE
+DESC : Simulation end time
+<INFO>
+The simulation time starts at $t = 0$ (unless the simulation is restarting).
+TEND defines the end time of the simulation in seconds. If TEND has a negative
+value, then the end time of the simulation is given in scaled time. See DTSAVE
+for more info about scaled time.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+</CODE>
+SECTION : TIME
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TENSILE : INT
+DESC : Tensile failure
+<INFO>
+This option switches the tensile failure model on (1) or off (0, default).
+See the material model chapter for more details.
+For large-scale cratering simulations tensile failure tends to play
+a minor role in the total damage; in such cases it is preferable
+(for efficiency reasons) to turn the tensile failure model off.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 0
+VALUES : 0 : 1
+</CODE>
+SECTION : CONTROL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TFRAC : DBLE
+DESC : Thermal soft. constant
+<INFO>
+The shear strength of rock materials depends on temperature, reducing to zero at the melting temperature. iSALE approximates this behavior using the simple relationship (after Ohnaka, 1995). See manual for details.
+TFRAC is the Constant in thermal softening law.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MATTHSOFT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : THSOFT : STR
+DESC : Thermal softening
+<INFO>
+Sets the thermal softening model used for this material. Available models are
+\begin{itemize}
+
+\item OHNAKA Smooth hyperbolic tangent function of temperature. For use with all strength models except
+JNCK.
+
+\item JNCK Polynomial function of temperature. For use with Johnson and Cook (JNCK) strength model.
+\item NONE No thermal softening.
+
+\end{itemize}
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+VALUES : OHNAKA : JNCK : NONE
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_ALPHA : DBLE
+DESC : Tillotson alpha constant
+<INFO>
+Tillotson alpha constant. Set to zero for simplified (stiffened) gas EoS.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 0.D0
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_BETA : DBLE
+DESC : Tillotson beta constant
+<INFO>
+Tillotson beta constant. Set to zero (default) for simplified (stiffened) gas EoS.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 0.D0
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_BULKA : DBLE
+DESC : Bulk modulus
+<INFO>
+Bulk modulus (zero pressure) in Pa. Set to zero (default) for gas EoS.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 0.0D0
+RANGE : 0.D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_BULKB : DBLE
+DESC : Tillotson B constant (Pa)
+<INFO>
+Tillotson B constant (Pa). Set to zero (default) for linear or gas EoS.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 0.D0
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_CHEAT : DBLE
+DESC : spec. heat capacity
+<INFO>
+The option C\_HEAT sets the specific heat capacity of
+the material, in J/(kg K). It is required when using
+the Tillotson equation of state for a material to compute
+an approximate temperature.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_ECV : DBLE
+DESC : Energy of complete vaporization
+<INFO>
+Specific internal energy of complete vaporization (J/kg). Set to a very high value (default) for no vaporization.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 1.D32
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_EIV : DBLE
+DESC : Energy of incipient vaporization
+<INFO>
+Specific internal energy of incipient vaporization (J/kg). Set to a very high value (default) for no vaporization.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 1.D32
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_EZERO : DBLE
+DESC : Tillotson E0 constant
+<INFO>
+Tillotson E0 constant (J/kg). Set to zero for simple (stiffened) gas EoS.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 0.D0
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TLIM : DBLE
+DESC : wall clock limit
+<INFO>
+This is the CPU time (in seconds) after which the simulation will end.
+This feature is useful when iSALE is run on a shared cluster with a wall
+time (i.e. a fixed CPU time) limit; in which case, set TLIM to somewhat less
+than the wall time limit, in seconds. The default is 1.D32 i.e. a very, very
+long time; for reference, the universe is currently approx. 4.4D17 s old.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D32
+RANGE : -1.D60 : 1.D70
+</CODE>
+SECTION : TIME
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_RHO0 : DBLE
+DESC : Reference density
+<INFO>
+Sets the reference density (in kg/m$^3$) for the Tillotson equation of state.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_THERMA : DBLE
+DESC : Tillotson a constant
+<INFO>
+Tillotson a constant. This is Gruneisen gamma (reference state) in the stiffened gas simplification.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TL_THERMB : DBLE
+DESC : Tillotson b constant
+<INFO>
+Tillotson b constant. Set to zero to simplify to (stiffened) gas EoS.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+TEST : NO
+DEFVAL : 0.D0
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TILLO
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TMELT0 : DBLE
+DESC : Melt temperature
+<INFO>
+Melt temperature at zero pressure (K). See manual for decription how iSALE uses the Simon approximation to determine the melt temperature as a function of the pressure.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MATTEMP
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TOFF : DBLE
+DESC : Vibration duration
+<INFO>
+Model time after which no new acoustic vibrations are triggered. This parameter is required for the BLOCK acoustic fluidisation model. 
+This value should usually be set to be smaller than the time the shock wave takes to reach the boundary, to prevent reflections of the shock wave interfering with the vibrations. 
+The default value is set to a high number to prevent vibrations being cut off early, but should probably be changed according to the model setup.
+An example: For a 100 km radius high resolution zone, sound waves with a velocity of around 6 km/s will take c. 16 secs to reach the boundary.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 999.D0
+RANGE : 0.D0 : 
+</CODE>
+SECTION : ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TOPACC : DBLE
+DESC : top acc.
+<INFO>
+This parameter is only required if the boundary condition 'SQSHEAR' is used on all boundaries.
+If set it defines the constant acceleration of the shear deformation. Set to zero for constant velocity
+deformation.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0.
+RANGE : :
+TEST : BNDSQSHEAR
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TOPVEL : DBLE
+DESC : top vel.
+<INFO>
+This parameter is only required, if the boundary condition 'SQSHEAR' is used (on all boundaries).
+It defines the constant velocity of of the shear deformation.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : NO
+RANGE : :
+TEST : BNDSQSHEAR
+</CODE>
+SECTION : BOUNDARY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_AREA : INT
+DESC : tracer area
+<INFO>
+With these parameters you can limit the area (3D: volume) 
+where tracers are placed.
+For this reason 4 (iSALE-3D: 6) parameters are required:
+LEFT : RIGHT : BOTTOM : TOP ( : FRONT : BACK)
+Use these parameters to define the first and last cell
+of the tracer mesh for each direction.
+
+Default: Tracer mesh is limited to the high-resolution zone.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+COL : 1 : 4
+TEST : TRACER
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+COL : 1 : 6
+TEST : TRACER
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_MOTION : STR
+DESC : Tracer motion
+<INFO>
+This parameter selects the algorithm moving the tracers. Currently available:
+\begin{itemize}
+\item VELOCITY : interpolate tracer velocity from node velocities
+\item MATERIAL : use material fluxes to calculate tracer velocity
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : VELOCITY
+VALUES : VELOCITY : MATERIAL
+TEST : TRACER
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : VELOCITY
+VALUES : VELOCITY
+TEST : TRACER
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_OFFD : DBLE
+DESC : depth tracer offset
+<INFO>
+This parameter defines where in the cell (depth/third dimension) the tracer is placed.
+This is only required for iSALE-3D.
+A negative value counts in cells.
+Default is in the middle.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : -0.5D0
+RANGE : :
+TEST : TRACER
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_OFFH : DBLE
+DESC : hor. tracer offset
+<INFO>
+This parameter defines where in the cell (horizontal direction) the tracer is placed.
+A negative value counts in cells.
+Default is in the middle.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : -0.5D0
+RANGE : :
+TEST : TRACER
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_OFFV : DBLE
+DESC : vert. tracer offset
+<INFO>
+This parameter defines where in the cell (vertical direction) the tracer is placed.
+A negative value counts in cells.
+Default is in the middle.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : -0.5D0
+RANGE : :
+TEST : TRACER
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_QUAL : INT
+DESC : Tracer quality
+<INFO>
+This parameter determines whether Lagrangian tracers should be used or not. You 
+need to set \verb+TR_QUAL+ = 1 for iSALE to store tracer variables.
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : YES
+DEFVAL : 0
+</CODE>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : 0
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_SPCD : DBLE
+DESC : depth tracer spacing 
+<INFO>
+This parameter defines the tracer spacing in depth (third dimension).
+This is only required for iSALE-3D.
+A negative value counts in cells.
+</INFO>
+<CODE>
+DIM : 3
+OPTIONAL : YES
+DEFVAL : -1.D0
+RANGE : :
+TEST : TRACER
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_SPCH : DBLE
+DESC : hor. tracer spacing 
+<INFO>
+This parameter defines the horizontal (X-direction) tracer spacing.
+A negative value counts in cells.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : -1.D0
+RANGE : :
+TEST : TRACER
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_SPCV : DBLE
+DESC : vert. tracer spacing 
+<INFO>
+This parameter defines the vertical tracer spacing.
+A negative value counts in cells.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : -1.D0
+RANGE : :
+TEST : TRACER
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : TR_VAR : STR
+DESC : Tracer fields
+<INFO>
+The set of tracer fields to save in the data file 
+is defined by the TR\_VAR parameter.
+
+The parameter input is a continuous string containing
+abbreviated variable names.
+The table below lists the most important abbreviations.
+
+Tracer positions are stored automatically.
+
+\begin{description}
+\item[TrP]  Peak pressure 
+\item[TrT]  Peak temperature 
+\item[TrE]  Peak specific internal energy
+\item[Trp]  Pressure 
+\item[Trt]  Temperature 
+\item[Tre]  Specific internal energy
+\item[Trd]  Density
+\item[TrM]  Material
+\item[TrA]  Distension (alpha)
+\item[TrV]  Volume strain
+\item[TrS]  XX and YY components of the dev. stress tensor
+\item[TrX]  XX component of the dev. stress tensor
+\item[TrY]  YY component of the dev. stress tensor
+\end{description}
+
+The variable string should begin and end with \#.  A '-' is used to separate variables.  
+For example the string
+
+\#TrP-TrT-TrM\#
+
+tells iSALE to save... Peak pressure, peak temperature, and material 
+(plus the tracer positions, which are always stored)
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+</CODE>
+SECTION : TRACER
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : T_SURF : DBLE
+DESC : Surface temperature (K)
+<INFO>
+Temperature at surface in degrees Kelvin. Default is 293 K (20 C). If no 
+object temperature or energy is set (see OBJTEMP/ENER), then T\_SURF is 
+also used as the object temperature. 
+</INFO>
+SECTION : GRADIENT
+<CODE>
+DIM : 1
+RANGE : 0.D0 :
+RRANGE : 0.D0 : 5000.D0
+OPTIONAL : YES
+DEFVAL : 293.0D0
+</CODE>
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : VARLIST : STR
+DESC : Output fields
+<INFO>
+The set of variables that are saved in the data file
+is defined by the VARLIST parameter.  
+The parameter input is a continuous string containing
+abbreviated variable names.
+The table below lists the most important abbreviations.
+
+\begin{description}
+\item[Den]  Density 
+\item[Tmp]  Temperature 
+\item[Pre]  Pressure 
+\item[Sie]  Specific Internal Energy 
+\item[Dam]  Damage i.e. Total Plastic (shear) Strain 
+\item[VSt]  Volume strain 
+\item[Alp]  Distension 
+\item[Yld]  Yield Strength 
+\item[YAc]  Strength of weakening due to Acoustic Fluidization 
+\item[VEL]  Velocity components (horz. and vert.; cell-centered) 
+\item[Dm1]  Dummy field number 1 
+\item[Dm2]  Dummy field number 2 
+\item[C\_x]  Horizontal co-ordinate (needed for 2D Lagrangian calcs.)  
+\item[C\_y]  Vertical co-ordinate (needed for 2D Lagrangian calcs.)  
+\end{description}
+
+The variable string should begin and end with \#.  A '-' is used to separate variables.  
+For example the string
+
+\#Den-Tmp-Pre-Yld-VEL\#
+
+tells iSALE to save... density, temperature, pressure, yield strength, and the 
+cell-centered velocity components.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+</CODE>
+SECTION : OUTPUT
+</PARAM> 
+----------------------------------------------
+<PARAM>
+ABBREV : VEL_CUT : DBLE
+DESC : Velocity cutoff
+<INFO>
+Stability parameter. Velocities above this value are 
+assumed to be artificial and cropped to increase stability.
+A negative value scales with the maximum impact velocity.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : -1.697D0
+RANGE : :
+</CODE>
+SECTION : STABILITY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : VEL_MIN : DBLE
+DESC : Min. velocity
+<INFO>
+Minimum allowed velocity (for cutoff). Used instead of impact velocity
+if that is zero.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 100.D0
+RANGE : 0.D0 : 
+RRANGE : 0.D0 : 3.D4
+</CODE>
+SECTION : STABILITY
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : VIBDAMP : INT
+DESC : Acoustic vibration damping 
+<INFO>
+This option selects how (if at all) acoustic vibrations should
+be damped. 
+
+VIBDAMP == 0 applies no damping
+	     vibrations are cutoff at pressures exceeding VIBPLIM
+VIBDAMP == 1 applies thermal damping
+             vibrations are damped as temperature approaches the
+             melt temperature and cutoff at pressures exceeding VIBPLIM
+VIBDAMP == 2 applies pressure damping
+             vibrations are damped as pressure approaches the
+             cutoff pressure of VIBPLIM
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1
+VALUES : 0 : 1 : 2
+</CODE>
+SECTION : ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : VIB_MAX : DBLE
+DESC : Max. vib. velocity
+<INFO>
+This parameter is the maximum permitted vibration velocity.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 200.D0
+RANGE : 0.D0 : 
+</CODE>
+SECTION : ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : VIBPLIM : DBLE
+DESC : Pressure cutoff for vibrations
+<INFO>
+Pressure above which vibrations are completely damped. 
+If VIBDAMP < 2, this is a simple switch above which the vibrations
+are turned off; if VIBDAMP == 2, the vibrational pressure is reduced
+as a linear function of pressure.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 25.D9
+RANGE : 1.D0 : 
+RRANGE : 1.D9 : 1.D11
+</CODE>
+SECTION : ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : VIB_WAVLEN : DBLE
+DESC : Wavelength of dominant acoustic vibrations.
+<INFO>
+The wavelength of the acoustic vibrations in the acoustically fluidized rock mass (Melosh,1979). 
+
+The value is scaled to a 1km diameter impactor, assuming the wavelength is 10\% of the impactor diameter.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : YES
+DEFVAL : 1.D0
+RANGE : 0.D0 : 
+</CODE>
+SECTION : ACFL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : VISCO : STR
+DESC : Viscoelastic model
+<INFO>
+
+Sets the viscoelastic model.
+\begin{description}
+\item[NONE]    - No viscoelasticity at all.
+\item[MAXWELL] - Maxwell viscoelastic, requires input parameter 'VISC' (viscosity).
+\end{description}
+</INFO>
+<CODE>
+DIM : 2
+OPTIONAL : NO
+TEST : NO
+VALUES : NONE : MAXWELL
+</CODE>
+SECTION : MATHEAD
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : VISC : DBLE
+DESC : Viscosity
+<INFO>
+This parameter defines the viscosity of the material and
+is only used if STRMOD=LIQU.
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+</CODE>
+SECTION : MAT_GENERAL
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : YDAM0 : DBLE
+DESC : Cohesion (damaged)
+<INFO>
+Parameter for the cohesion of damaged material, used in the strength models:
+\begin{itemize}
+ \item ROCK - Cohesion of damaged material
+ \item DRPR - Cohesion (yield strength at zero pressure)
+ \item LUNDD - Cohesion (yield strength at zero pressure)
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YDAM
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : YINT0 : DBLE
+DESC : Cohesion (intact)
+<INFO>
+Parameter for the cohesion, used in the strength models:
+\begin{itemize}
+ \item ROCK - Cohesion of intact material
+ \item LUNDI - Cohesion (yield strength at zero pressure)
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YINT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : YLIMDAM : DBLE
+DESC : Strength limit (damaged)
+<INFO>
+Parameter limiting strength at high pressure for damaged material, used in the strength models:
+\begin{itemize}
+ \item ROCK - Limiting strength at high pressure for damaged material
+ \item DRPR - Limiting strength at high pressure
+ \item LUNDD - Limiting strength at high pressure
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YDAM
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : YLIMINT : DBLE
+DESC : Strength limit (intact)
+<INFO>
+Parameter limiting strength at high pressure for intact material, used in the strength models:
+\begin{itemize}
+ \item ROCK - Limiting strength at high pressure for intact material
+ \item LUNDI - Limiting strength at high pressure
+\end{itemize}
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_YINT
+</PARAM>
+ 
+----------------------------------------------
+<PARAM>
+ABBREV : YTENS0 : DBLE
+DESC : Tensile strength (intact)
+<INFO>
+
+This parameter defines the tensile strength for intact material (Pa) and should be a positive value.
+
+The COLLINS damage model can compute damage D resulting from both tensile and shear failure. The tensile failure/damage accumulation model is activated by the control parameter TENSILE.
+For a detailed description and the exact formulas see the relevant section of the manual.
+
+</INFO>
+<CODE>
+DIM : 1
+OPTIONAL : NO
+TEST : NO
+RANGE : 0.0D0 :
+</CODE>
+SECTION : MAT_TENS
+</PARAM>
