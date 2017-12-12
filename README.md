@@ -1,6 +1,7 @@
 # automation
 """ A simple python script for setting up and submitting batches of iSALE jobs through SLURM. Meant for use in the terminal. Especially, though, this is meant as a quick introduction to git and github's useful features. 
 
+
 To clone the repository into your own home space, find the green button on the github page that says 'clone or download.' You will find a weblink. Use the following commands to clone the directory into a directory of your chpoice. Within that directory:
 
 git clone [ssh weblink]
