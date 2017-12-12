@@ -5,7 +5,11 @@ To clone the repository into your own home space, find the green button on the g
 
 git clone [ssh weblink]
 
-Now you should be on the master branch. If you want to make edits without changing this branch, checkout a new branch:
+Now you should be on the master branch. If you want to make edits without changing this branch, checkout a new branch. The first two are ways to check what branches exist, both locally and remotely, followed by how to check out a new branch:
+
+git branch
+
+git branch -a
 
 git checkout -b [branch_name]
 
